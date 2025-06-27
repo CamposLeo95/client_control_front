@@ -1,8 +1,9 @@
 
 import axios from "axios";
 import { cookies } from "next/headers";
-import TableClients from "./components/table-clients";
-import TableClientsMobile from "./components/table-clients-mobile";
+import TableClients from "../components/table-clients";
+import TableClientsMobile from "../components/table-clients-mobile";
+
 
 type IParams = {
   page?: string;
@@ -16,7 +17,7 @@ interface Props {
   searchParams: Promise<IParams>;
 }
 
-export default async function ClientsPage({ searchParams }: Props) {
+export default async function ClientPage({ searchParams }: Props) {
   const token = (await cookies()).get("api-token")?.value;
   const searchParamsRes = await searchParams;
   const {data} = await axios.get(`http://localhost:8080/client`, {

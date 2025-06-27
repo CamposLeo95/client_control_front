@@ -1,18 +1,19 @@
-import NavBarApp from "./_components/nav-bar";
-import SideBar from "./_components/side-bar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/ui/app-sidebar";
 
 export default function LayoutApp({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex min-h-screen">
-      <aside className="hidden md:flex md:flex-col w-48 ">
-        <SideBar />
-      </aside>
-      <div className="flex flex-col flex-1 min-h-screen ">
-        <header className="sticky top-0 shadow h-16 flex items-center w-full">
-          <NavBarApp />
-        </header>
-        <main className="flex-1 p-4 ">{children}</main>
-      </div>
+    <SidebarProvider
+    >
+      <AppSidebar />
+      <main className="flex-1 px-4 bg-gray-100 w-full ">
+        <SidebarTrigger />
+        <div className=" lg:px-20 xl:px-20 2xl:px-20 py-4">
+        {children}
+        </div>
+      </main>
+    </SidebarProvider>
     </div>
   );
 }
