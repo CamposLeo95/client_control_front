@@ -1,0 +1,72 @@
+'use server'
+import { cookies } from "next/headers";
+import axios from "axios";
+const URL_API = process.env.NEXT_PUBLIC_API_URL;
+
+type BodyProps = {
+  clientId: number | null;
+  serviceId: number | null;
+  valueService: number;
+  description?: string;
+}
+
+export default async function createPayment(_prevState: any, body: BodyProps) {
+  const token = (await cookies()).get("api-token")?.value;
+
+  if (!body.clientId) {
+    return {
+      verifyReq: false,
+      message: "O cliente é obrigatório!",
+      isSuccess: false,
+    };
+  }
+
+  if (!body.serviceId) {
+    return {
+      verifyReq: false,
+      message: "O serviço é obrigatório!",
+      isSuccess: false,
+    };
+  }
+
+  try {
+    const res = await axios.post(`${URL_API}/payment`, {
+      client_id: body.clientId,
+      serviceOffering_id: body.serviceId,
+      value: body.valueService,
+      description: body.description,
+    }, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+    if (res.status !== 201) {
+      return {
+        verifyReq: false,
+        message: "Erro ao criar pagamento",
+        isSuccess: false,
+      };
+    }
+    return {
+      verifyReq: true,
+      message: "Pagamento criado com sucesso!",
+      isSuccess: true
+    };
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return {
+        verifyReq: false,
+        message: error.response?.data?.message || "Erro ao criar pagamento",
+        isSuccess: false,
+      };
+    }
+
+    return {
+      verifyReq: false,
+      message: "Erro ao criar pagamento",
+      isSuccess: false,
+    };
+  }
+}

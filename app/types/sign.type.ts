@@ -1,15 +1,16 @@
+import { IClient } from "./client.type";
+import { IService } from "./services.type";
 
-type ISign = {
+export type ISign = {
   id: number;
   activeSign: boolean;
   expireDate: [number, number, number];
-  client: {
-    id: number;
-    name: string;
-    email: string;
-    login: string;
-    password: string;
-    phone: string;
-  };
-  serviceOffering: { id: number; name: string; price: number };
+  client: IClient;
+  serviceOffering: IService;
+}
+
+export type ISignToPayment = {
+  id: number;
+  activeSign: boolean;
+  expireDate: [number, number, number];
 }

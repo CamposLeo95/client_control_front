@@ -16,17 +16,18 @@ interface Props {
   searchParams: Promise<IParams>;
 }
 
+const URL_API = process.env.NEXT_PUBLIC_API_URL;
 export default async function ClientsPage({ searchParams }: Props) {
   const token = (await cookies()).get("api-token")?.value;
   const searchParamsRes = await searchParams;
-  const {data} = await axios.get(`http://localhost:8080/client`, {
+  const {data} = await axios.get(`${URL_API}/client`, {
     headers: {
       "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
     },
     params: {
       page: searchParamsRes.page || 0,
-      size: 5,
+      size: 7,
       all: searchParamsRes.all || "",
       startDate: searchParamsRes.startDate || "2000-01-01",
       endDate: searchParamsRes.endDate || "3000-01-01",
