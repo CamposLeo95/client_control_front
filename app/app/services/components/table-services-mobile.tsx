@@ -37,7 +37,7 @@ export default function TableServicesMobile({ services, page }: PaginationProps)
       {services.length === 0 ? (
         <div className="flex items-center justify-center h-96 flex-col gap-4 ">
             <Image src="/error-404.png" alt="Admin Panel" width={80} height={80}/>
-            <span className="text-gray-500 font-semibold">Nenhum cliente encontrado!</span>
+            <span className="text-gray-500 font-semibold">Nenhum serviço encontrado!</span>
           </div>
         ) : (
           services.map((service) => (

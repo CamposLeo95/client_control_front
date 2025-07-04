@@ -1,5 +1,6 @@
 import { IClient } from "@/app/types/client.type";
 import { formatterDateAPI } from "@/app/utils/formatter-date";
+import { Card, CardContent } from "@/components/ui/card";
 import { UserCircle2 } from "lucide-react";
 import Link from "next/link";
 
@@ -9,23 +10,23 @@ interface ICardsClientMobileProps {
 
 export default function CardsClientMobile({ client }: ICardsClientMobileProps) {
   return (
-    <Link href={`/app/clients/${client.id}`}>
-      <div className="mt-3 w-full rounded-xl bg-white shadow-md p-4 hover:bg-zinc-50 transition-colors duration-200 cursor-pointer flex items-center gap-4">
-        <div className="text-indigo-600">
-          <UserCircle2 size={40} strokeWidth={1.5} />
-        </div>
+    <Link href={`/app/clients/${client.id}`} passHref>
+      <Card className="rounded-lg shadow-sm transition hover:shadow-md hover:bg-zinc-900 cursor-pointer mb-2">
+        <CardContent className="flex items-center gap-4">
+          <UserCircle2 size={36} className="text-indigo-500 shrink-0" strokeWidth={1.5} />
 
-        <div className="flex-1">
-          <p className="font-semibold text-zinc-900">{client.name}</p>
-          <p className="text-sm text-zinc-500">{client.email}</p>
-        </div>
-
-        {client.createdAt && (
-          <div className="text-xs text-zinc-400 italic text-right min-w-[80px]">
-            {formatterDateAPI(client.createdAt)}
+          <div className="flex-1 overflow-hidden">
+            <p className="font-semibold truncate">{client.name}</p>
+            <p className="text-sm text-zinc-400 truncate">{client.email}</p>
           </div>
-        )}
-      </div>
+
+          {client.createdAt && (
+            <p className="text-xs text-zinc-500 text-right italic whitespace-nowrap min-w-[70px]">
+              {formatterDateAPI(client.createdAt)}
+            </p>
+          )}
+        </CardContent>
+      </Card>
     </Link>
   );
 }

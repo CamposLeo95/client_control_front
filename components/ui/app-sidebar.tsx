@@ -1,88 +1,86 @@
 "use client"
 
+import { MySelf } from "@/app/types/user.type"
+import { NavMain } from "@/components/nav-main"
+import { NavUser } from "@/components/nav-user"
 import {
   Sidebar,
   SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
+  SidebarFooter,
+  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
-  SidebarMenuItem
+  SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { BadgeDollarSign, FileArchive, Handshake, LayoutDashboard, User, UserCircle } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { Separator } from "./separator"
-import { MySelf } from "@/app/types/user.type"
+import {
+  IconChartBar,
+  IconDashboard,
+  IconFolder,
+  IconInnerShadowTop,
+  IconListDetails,
+  IconUsers
+} from "@tabler/icons-react"
+import * as React from "react"
 
+const data = {
+  user: {
+    name: "shadcn",
+    email: "m@example.com",
+    avatar: "/avatars/shadcn.jpg",
+  },
+  navMain: [
 
+    {
+      title: "Clientes",
+      url: "/app/clients",
+      icon: IconListDetails,
+    },
+    {
+      title: "Assinaturas",
+      url: "/app/subscriptions",
+      icon: IconChartBar,
+    },
+    {
+      title: "Pagamentos",
+      url: "/app/payments",
+      icon: IconFolder,
+    },
+    {
+      title: "Serviços",
+      url: "/app/services",
+      icon: IconUsers,
+    },
+  ],
+}
 
-export function AppSidebar() {
+interface AppSidebarProps {
+  user: MySelf
+}
 
-  const activePath = usePathname()
-
-  const items = [
-  {
-    title: "Dashboard",
-    url: "/app/dashboard",
-    icon: LayoutDashboard,
-  },
-  {
-    title: "Clientes",
-    url: "/app/clients",
-    icon: User,
-  },
-  {
-    title: "Assinaturas",
-    url: "/app/subscriptions",
-    icon: FileArchive,
-  },
-  {
-    title: "Pagamentos",
-    url: "/app/payments",
-    icon: BadgeDollarSign,
-  },
-  {
-    title: "Serviços",
-    url: "/app/services",
-    icon: Handshake,
-  },
-]
+export function AppSidebar({ user, ...props }: AppSidebarProps & React.ComponentProps<typeof Sidebar>) {
   return (
-   <Sidebar>
-      <SidebarContent className="bg-zinc-800 text-white">
-        <SidebarGroup>
-          <SidebarGroupLabel className="flex  items-center justify-between  px-4">
-            <div className="flex w-full items-center gap-2 ">
-              <Link href="/app/dashboard" className="flex items-center ">
-                <Image src="/logo.png" alt="Admin Panel"  width={80} height={80}/>
-              </Link>
-
-
-            </div>
-          </SidebarGroupLabel>
-          <Separator className="mt-5 mb-2" />
-          <SidebarGroupContent>
-            <SidebarMenu className="space-y-2">
-              {items.map((item) => (
-                <SidebarMenuItem key={item.title} className={`hover:bg-indigo-400 cursor-pointer h-12  hover:text-white rounded-xs text-sm font-semibold active:bg-indigo-500 active:text-white ${activePath.startsWith(item.url) ? 'bg-indigo-500 text-white' : ''}`}>
-                  <SidebarMenuButton asChild className={`hover:bg-indigo-500 hover:text-white rounded-xs text-sm font-semibold active:bg-indigo-600 active:text-white ${activePath.startsWith(item.url)  ? 'bg-indigo-600 text-white' : ''}`}>
-                    <Link href={item.url} className="h-full" >
-                    <div className="flex items-center gap-2 h-full ">
-                      <item.icon className="w-5 h-5"/>
-                      <span>{item.title}</span>
-                    </div>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-
-          </SidebarGroupContent>
-        </SidebarGroup>
+    <Sidebar collapsible="offcanvas" {...props}  >
+      <SidebarHeader  >
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton
+              asChild
+              className="data-[slot=sidebar-menu-button]:!p-1.5"
+            >
+              <a href="/app/clients">
+                <IconInnerShadowTop className="!size-5" />
+                <span className="text-base font-semibold">Controle de Clientes</span>
+              </a>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarHeader>
+      <SidebarContent >
+        <NavMain items={data.navMain} />
       </SidebarContent>
+      <SidebarFooter >
+        <NavUser user={user} />
+      </SidebarFooter>
     </Sidebar>
   )
 }

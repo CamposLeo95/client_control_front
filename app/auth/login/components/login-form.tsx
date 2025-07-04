@@ -1,66 +1,56 @@
-"use client"
-import { useRouter } from "next/navigation"
-import { useState } from "react"
+'use client'
+
+import { loginAction } from "@/app/actions/auth/login";
+import FormField from "@/components/form-field";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { Loader2, Lock, LogIn, Mail, User2 } from "lucide-react";
+import Form from "next/form";
+import Link from "next/link";
+import { useActionState } from "react";
 
 export default function LoginForm() {
-
-  const router = useRouter()
-  const [login, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [error, setError] = useState("")
-
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault()
-    setError("")
-    const res = await fetch("/api/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ login, password }),
-    })
-    if (res.ok) {
-      router.push("/app/dashboard")
-    } else {
-      setError("Usuário ou senha inválidos")
-    }
-  }
+const [_state, login, isPending] = useActionState(loginAction, {
+    verifyReq: true,
+    message: "",
+    isSuccess: false,
+  });
   
-return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-8 gap-8">
-      <h1 className="text-2xl font-bold">Login Page</h1>
-      <form
-        className="flex flex-col gap-4 w-full max-w-sm"
-        
-        onSubmit={handleSubmit}
-      >
-        <input
-          type="text"
-          placeholder="Username"
-          className="p-2 border border-gray-300 rounded"
-          required
-          value={login}
-          onChange={e => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          className="p-2 border border-gray-300 rounded"
-          required
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-        />
-        <button
-          type="submit"
-          className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition-colors"
-        >
-          Login
-        </button>
-        {error && (
-          <div className="text-red-500">{error}</div> 
-         )}
-      </form>
-    </div>
-  )
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-black px-4">
+      <Card className="w-full max-w-sm border border-zinc-800 bg-zinc-900 shadow-md">
+        <CardHeader className="text-center space-y-2">
+          <div className="w-12 h-12 mx-auto bg-gradient-to-r from-indigo-500 to-cyan-500 rounded-full shadow-md flex items-center justify-center">
+            <LogIn className="text-white" />
+          </div>
+          <h2 className="text-white text-xl font-bold">Bem vindo de volta!</h2>
+          <p className="text-sm text-zinc-400">
+            Não possui uma conta?{" "}
+            <Link href="/auth/register" className="text-indigo-400 hover:underline">
+              Inscreva-se
+            </Link>
+          </p>
+        </CardHeader>
 
+        <CardContent>
+          <Form action={login} className="space-y-4">
+            <FormField Icon={User2} name="login" id="login"  placeholder="Login" type="text" />
+            <FormField Icon={Lock} name="password" id="password"  placeholder="Password" type="password" />
+            <Separator className="my-6" />
+            {isPending ? (
+              <Button type="submit" className="w-full bg-indigo-600 hover:bg-indigo-700 text-white cursor-not-allowed" disabled>
+                <span className="animate-spin"><Loader2 /></span>
+              </Button>
+            ) : (
+              <Button type="submit" className="w-full bg-indigo-600 hover:bg-indigo-700 text-white cursor-pointer">
+                Login
+              </Button>
+            )}
+
+          </Form>
+        </CardContent>
+      </Card>
+    </div>
+  );
 }

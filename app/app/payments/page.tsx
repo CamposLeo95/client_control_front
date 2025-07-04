@@ -1,9 +1,10 @@
 
 import axios from "axios";
 import { cookies } from "next/headers";
-import TableClientsMobile from "./components/table-clients-mobile";
+
 import TablePayments from "./components/table-payments";
 import { IPayment } from "@/app/types/payment";
+import TablePaymentsMobile from "./components/table-payments-mobile";
 
 
 type IParams = {
@@ -41,7 +42,7 @@ export default async function PaymentsPage({ searchParams }: Props) {
     <div>
       <div className="flex flex-col items-center justify-center md:px-4 gap-8">
         <TablePayments payments={payments} page={searchParamsRes.page || 0} />
-        {/* <TableClientsMobile clients={data} page={searchParamsRes.page || 0} /> */}
+        <TablePaymentsMobile payments={payments} page={searchParamsRes.page || 0} />
       </div>
     </div>
   );

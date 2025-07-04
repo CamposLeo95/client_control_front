@@ -1,0 +1,35 @@
+"use server"
+
+import axios from "axios";
+
+const URL_API = process.env.NEXT_PUBLIC_API_URL;
+
+export async function registerAction(_prevState: any, formData: FormData) {
+  const {name, email, login, password} = Object.fromEntries(formData.entries());
+    try {
+    const res = await axios.post(`${URL_API}/user`,
+      { name, email, login, password, role: "USER" }, 
+      {
+        headers: {
+          "Content-Type": "application/json",
+        }
+      }
+    );
+
+    if (res.status !== 200) {
+      throw new Error(`Erro ao fazer cadastrar usuario!`);
+    }
+
+    return {
+      verifyReq: true,
+      message: "Cadastro realizado com sucesso!",
+      isSuccess: true,
+    }
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        return error.response?.data || error.message
+      }
+      return "Erro interno ao criar cliente. Tente novamente mais tarde!"; 
+    }
+
+}

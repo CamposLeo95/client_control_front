@@ -1,7 +1,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Handshake, Plus } from "lucide-react";
+import { BriefcaseBusiness, Handshake, Plus } from "lucide-react";
 
 import { IService } from "@/app/types/services.type";
 import formatterPrice from "@/app/utils/formmatter-price";
@@ -52,14 +52,16 @@ export default function TableServices({ services, page }: PaginationProps) {
         ) : (
         <Table >
           <TableHeader>
-            <TableRow className="bg-gray-100">
-              <TableHead>Nome</TableHead>
-              <TableHead>Preço</TableHead>
+            <TableRow className="bg-indigo-500 hover:bg-indigo-500">
+              <TableHead></TableHead>
+              <TableHead className="text-white">Nome</TableHead>
+              <TableHead className="text-white">Preço</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody className="space-y-5">
             {services.map((item) => (
               <TableRow  key={item.id} className="cursor-pointer  hover:bg-indigo-400 hover:text-white" >
+                <TableCell className="py-4 uppercase"><Link href={`/app/services/${item.id}`}><BriefcaseBusiness className="text-2xl text-indigo-600" /></Link></TableCell>
                 <TableCell className="py-4 uppercase"><Link href={`/app/services/${item.id}`}>{item.name}</Link></TableCell>
                 <TableCell><Link href={`/app/services/${item.id}`}>{formatterPrice(item.price)}</Link></TableCell>
               </TableRow>

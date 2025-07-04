@@ -1,19 +1,17 @@
 
-import { IClient } from "@/app/types/client.type";
 import { formatterDateAPI } from "@/app/utils/formatter-date";
-import { formatPhoneNumber } from "@/app/utils/formatter-phone";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { BadgeDollarSign, Plus, ToggleLeft, ToggleRight, UserCircle } from "lucide-react";
+import { BadgeDollarSign, CircleDollarSignIcon, Plus } from "lucide-react";
 
+import { IPayment } from "@/app/types/payment";
+import formatterPrice from "@/app/utils/formmatter-price";
+import BadgeTable from "@/components/badge-table";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 import Link from "next/link";
 import FilterTable from "./filter-table";
 import { PaginationTableClient } from "./pagination-client";
-import { IPayment } from "@/app/types/payment";
-import formatterPrice from "@/app/utils/formmatter-price";
-import BadgeTable from "@/components/badge-table";
 
 interface PaginationProps {
   payments: IPayment[];
@@ -51,23 +49,23 @@ export default function TablePayments({ payments, page }: PaginationProps) {
         {payments.length === 0 ? (
          <div className="flex items-center justify-center h-80 flex-col gap-4 ">
             <Image src="/error-404.png" alt="Admin Panel"  width={80} height={80}/>
-            <span className="text-gray-500 font-semibold">Nenhum cliente encontrado!</span>
+            <span className="text-gray-500 font-semibold">Nenhum pagamento encontrado!</span>
           </div>
         ) : (
         <Table >
           <TableHeader>
-            <TableRow className="bg-gray-100">
+            <TableRow className="bg-indigo-500 hover:bg-indigo-500">
               <TableHead></TableHead>
-              <TableHead>Cliente</TableHead>
-              <TableHead>Status Assinatura</TableHead>
-              <TableHead>Valor</TableHead>
-              <TableHead>Data Pagamento</TableHead>
+              <TableHead className="text-white">Cliente</TableHead>
+              <TableHead className="text-white">Status Assinatura</TableHead>
+              <TableHead className="text-white">Valor</TableHead>
+              <TableHead className="text-white">Data Pagamento</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody className="space-y-5">
             {payments.map((item) => (
               <TableRow  key={item.id} className="cursor-pointer  hover:bg-indigo-400 hover:text-white" >
-                <TableCell  className="py-4"><Link href={`/app/payments/${item.id}`}><UserCircle className="text-2xl" /></Link></TableCell>
+                <TableCell  className="py-4"><Link href={`/app/payments/${item.id}`}><CircleDollarSignIcon className="text-2xl text-indigo-600" /></Link></TableCell>
                 <TableCell><Link href={`/app/payments/${item.id}`}>{item.client.name}</Link></TableCell>
                 <TableCell >
                   <Link href={`/app/payments/${item.id}`}>

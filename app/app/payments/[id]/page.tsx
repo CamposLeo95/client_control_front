@@ -16,6 +16,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import InfoRow from "@/components/info-row";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 
 const URL_API = process.env.NEXT_PUBLIC_API_URL;
@@ -48,10 +49,10 @@ export default async function Payment({ params }: PaymentProps) {
   const renewDate = new Date(date.setMonth(date.getMonth() + monthsPaid)).toLocaleDateString('pt-BR');
 
   return (
-    <div className="flex flex-col items-center  gap-8">
-      <div className="w-full md:max-w-3xl bg-white rounded-xl shadow-sm p-6">
+    <div className="flex flex-col items-center gap-8">
+      <Card className="w-full md:max-w-3xl rounded-xl md:shadow-sm md:border-2 md:bg-primary-foreground bg-transparent border-none shadow-none">
         {/* Header */}
-        <div className="flex items-center justify-between">
+        <CardHeader className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <CircleDollarSign size={28} className="text-indigo-600" />
             <span className="text-xl font-semibold text-indigo-600 uppercase italic">
@@ -61,8 +62,9 @@ export default async function Payment({ params }: PaymentProps) {
           <Link href="/app/payments">
             <ArrowLeft className="text-zinc-500 hover:text-zinc-700" width={22} />
           </Link>
-        </div>
+        </CardHeader>
 
+<CardContent>
         <Separator className="my-4" />
 
         {/* Accordion */}
@@ -104,8 +106,9 @@ export default async function Payment({ params }: PaymentProps) {
             </AccordionContent>
           </AccordionItem>
         </Accordion>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
+</div>
   );
 }
 

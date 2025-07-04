@@ -40,20 +40,19 @@ export function Combobox({ title, itemId, setValue, list, icon }: Props) {
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
 
-          <div className=" border flex rounded-xs items-center  overflow-hidden bg-white ">
+      <div className=" border flex rounded-md items-center  overflow-hidden p-1 pl-2 cursor-pointer pr-5 hover:bg-secondary">
       {icon && (
-        <Label className=" border-r-2 p-2 bg-indigo-500 text-white">{icon}</Label>
+        <Label className="size-5  text-indigo-600">{icon}</Label>
       )}
-      <Button
-            variant="outline"
+      <button
             type="button"
             role="combobox"
             aria-expanded={open}
-            className="w-full h-full justify-between shadow-none rounded-xs p-2 hover:bg-transparent border-none text-indigo-400 hover:text-indigo-500 cursor-pointer"
+            className="w-full flex items-center pl-2  justify-between shadow-none rounded-xs p-1 hover:bg-transparent border-none text-indigo-400 hover:text-indigo-500 bg-transparent cursor-pointer"
         >
           {itemId ? list.find((item) => item?.value === itemId?.value)?.label : `Selecione um ${title}`}
-          <ChevronsUpDown className="opacity-50" />
-        </Button>
+          <ChevronsUpDown className="opacity-50 size-4"  />
+        </button>
     </div>    
       </PopoverTrigger>
       <PopoverContent className="p-0 w-[200px] lg:w-[350px]">

@@ -2,8 +2,8 @@
 import { ISign } from "@/app/types/sign.type";
 import axios from "axios";
 import { cookies } from "next/headers";
-import TableSubscriptions from "./components/table-clients";
-import TableSubscriptionMobile from "./components/table-clients-mobile";
+import TableSubscriptions from "./components/table-subscription";
+import TableSubscriptionMobile from "./components/table-subscription-mobile";
 
 type IParams = {
   page?: string;

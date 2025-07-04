@@ -17,6 +17,8 @@ import Link from "next/link";
 import InfoCardClient from "../components/info-card-client";
 import PasswordText from "../components/password-text";
 import InfoCard from "@/components/info-card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import BadgeTable from "@/components/badge-table";
 
 const URL_API = process.env.NEXT_PUBLIC_API_URL;
 
@@ -43,10 +45,10 @@ export default async function Client({ params }: ClientProps) {
   });
 
   return (
-    <div className="flex flex-col items-center px-4 gap-8">
-      <div className="w-full md:max-w-3xl bg-white rounded-xl shadow-sm p-6">
-        {/* Header */}
-        <div className="flex items-center justify-between">
+    <div className="flex flex-col items-center gap-8">
+    <Card className="w-full md:max-w-3xl rounded-xl md:shadow-sm md:border-2 md:bg-primary-foreground bg-transparent border-none shadow-none">
+
+        <CardHeader className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <UserCircle size={28} className="text-indigo-600" />
             <span className="text-xl font-semibold text-indigo-600 uppercase italic">
@@ -56,8 +58,8 @@ export default async function Client({ params }: ClientProps) {
           <Link href="/app/clients">
             <ArrowLeft className="text-zinc-500 hover:text-zinc-700" width={22} />
           </Link>
-        </div>
-
+        </CardHeader>
+<CardContent>
         <Separator className="my-4" />
         <Accordion type="single" collapsible className="w-full" defaultValue="item-1">
           <AccordionItem value="item-1">
@@ -77,7 +79,6 @@ export default async function Client({ params }: ClientProps) {
 
               <InfoCard icon={<Phone />} data={formatPhoneNumber(client.phone)} />
 	
-
               <InfoCard icon={<Lock />} data={<PasswordText value={client.password} />} />
 
 
@@ -100,25 +101,21 @@ export default async function Client({ params }: ClientProps) {
                 {signs.map((sign) => {
                   const isExpired = checkDateExpired(sign.expireDate);
                   return (
-                    <div
-                      key={sign.id}
-                      className="border rounded-lg p-4 bg-zinc-50 flex flex-col gap-3"
-                    >
+                    <Link  key={sign.id} href={`/app/subscriptions/${sign.id}`}>
+                    <div className="flex flex-col gap-2 p-4 border rounded-lg mb-2  transition-colors">
                       <div
                         className={`flex items-center justify-between font-medium ${
                           sign.activeSign ? "text-green-700" : "text-red-600"
                         }`}
                       >
+                       
                         <div className="flex items-center gap-2 italic">
-                          <BriefcaseBusiness className="text-zinc-500" size={18} />
+                          <BriefcaseBusiness  size={18} />
                           {sign.serviceOffering.name}
                           {!sign.activeSign && <span className="text-sm"> - (Desativada)</span>}
                         </div>
-                        {sign.activeSign ? (
-                          <ToggleRight size={20} />
-                        ) : (
-                          <ToggleLeft size={20} />
-                        )}
+               
+                        <BadgeTable isActive={sign.activeSign} />
                       </div>
 
                       <div
@@ -138,13 +135,15 @@ export default async function Client({ params }: ClientProps) {
                         data={formatterPrice(sign.serviceOffering.price)}
                       />
                     </div>
+                             </Link>
                   );
                 })}
               </AccordionContent>
             </AccordionItem>
           )}
         </Accordion>
-      </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }

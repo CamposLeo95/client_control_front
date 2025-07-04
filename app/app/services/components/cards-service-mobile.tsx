@@ -1,27 +1,26 @@
 import { IService } from "@/app/types/services.type";
 import formatterPrice from "@/app/utils/formmatter-price";
-import { UserCircle2 } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { BriefcaseBusiness } from "lucide-react";
 import Link from "next/link";
 
-interface ICardsClientMobileProps {
-  service: IService
+interface ICardServiceMobileProps {
+  service: IService;
 }
 
-export default function CardServiceMobile({service}: ICardsClientMobileProps) {
-
+export default function CardServiceMobile({ service }: ICardServiceMobileProps) {
   return (
-  
-    <div className="mt-3 min-h-20 w-full bg-white  shadow-sm p-4 hover:bg-gray-50 transition-colors cursor-pointer">
-      <Link href={`/app/services/${service.id}`} >
-      <div className="flex gap-5 h-full ">
-      <div> <UserCircle2  /></div>
-      <div className="flex-1 h-full flex flex-col justify-between"> 
-          <p className="font-bold">{service.name}</p>
-          <p className="text-sm text-gray-500">{formatterPrice(service.price)}</p>
-      </div>
-      </div>
-      </Link>
-    </div>
+    <Link href={`/app/services/${service.id}`} passHref>
+      <Card className=" rounded-lg shadow-sm p-4 mb-3 transition-colors cursor-pointer">
+        <div className="flex items-center gap-4">
+          <BriefcaseBusiness className="text-indigo-500" size={36} strokeWidth={1.5} />
 
+          <div className="flex-1 overflow-hidden">
+            <p className="font-semibold truncate">{service.name}</p>
+            <p className="text-sm text-zinc-500 truncate">{formatterPrice(service.price)}</p>
+          </div>
+        </div>
+      </Card>
+    </Link>
   );
 }

@@ -3,6 +3,7 @@ import axios from "axios";
 import { cookies } from "next/headers";
 import TableClients from "./components/table-clients";
 import TableClientsMobile from "./components/table-clients-mobile";
+import { Suspense } from "react";
 
 type IParams = {
   page?: string;
@@ -34,11 +35,13 @@ export default async function ClientsPage({ searchParams }: Props) {
     }
   });
 
+
+
   return (
     <div>
-      <div className="flex flex-col items-center justify-center md:px-4 gap-8">
-        <TableClients clients={data} page={searchParamsRes.page || 0} />
-        <TableClientsMobile clients={data} page={searchParamsRes.page || 0} />
+      <div className="flex flex-col items-center  justify-center md:px-4 gap-8">
+          <TableClients clients={data} page={searchParamsRes.page || 0} />
+          <TableClientsMobile clients={data} page={searchParamsRes.page || 0} />
       </div>
     </div>
   );

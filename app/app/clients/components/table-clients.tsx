@@ -53,19 +53,19 @@ export default function TableClients({ clients, page }: PaginationProps) {
         ) : (
         <Table >
           <TableHeader>
-            <TableRow className="bg-gray-100">
+            <TableRow className="bg-indigo-500 hover:bg-indigo-500">
               <TableHead></TableHead>
-              <TableHead>Nome</TableHead>
-              <TableHead>Login</TableHead>
-              <TableHead>Email</TableHead>
-              <TableHead>Telefone</TableHead>
-              <TableHead>Cadastro</TableHead>
+              <TableHead className="text-white">Nome</TableHead>
+              <TableHead className="text-white">Login</TableHead>
+              <TableHead className="text-white">Email</TableHead>
+              <TableHead className="text-white">Telefone</TableHead>
+              <TableHead className="text-white">Cadastro</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody className="space-y-5">
             {clients.map((item) => (
               <TableRow  key={item.id} className="cursor-pointer  hover:bg-indigo-400 hover:text-white" >
-                <TableCell  className="py-4"><Link href={`/app/clients/${item.id}`}><UserCircle className="text-2xl" /></Link></TableCell>
+                <TableCell  className="py-4"><Link href={`/app/clients/${item.id}`}><UserCircle className="text-2xl text-indigo-600" /></Link></TableCell>
                 <TableCell><Link href={`/app/clients/${item.id}`}>{item.name}</Link></TableCell>
                 <TableCell><Link href={`/app/clients/${item.id}`}>{item.login}</Link></TableCell>
                 <TableCell><Link href={`/app/clients/${item.id}`}>{item.email}</Link></TableCell>

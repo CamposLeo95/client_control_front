@@ -23,7 +23,7 @@ export default function FilterTableServices () {
     <>
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <div  className="w-full justify-between font-normal cursor-pointer flex items-center gap-2 px-4 py-2 rounded-md bg-white border border-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm text-gray-700">
+         <div  className="w-full justify-between font-normal cursor-pointer flex items-center gap-2 px-4 py-2 rounded-md  border  focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm ">
           Filtros
           <Filter width={15} />
         </div>
@@ -37,7 +37,7 @@ export default function FilterTableServices () {
         <DropdownMenuSeparator />
         <Button
           variant="outline"
-          className="w-full gap-2 font-normal cursor-pointer"
+          className="w-full gap-2 font-normal cursor-pointer text-white bg-indigo-400 hover:bg-indigo-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
           onClick={handleClearFilters}
         >
          
