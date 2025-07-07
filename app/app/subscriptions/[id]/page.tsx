@@ -34,11 +34,13 @@ interface SubscriptionProps {
   params: Promise<{ id: string }>;
 }
 
+const URL_API = process.env.NEXT_PUBLIC_API_URL;
+
 export default async function Subscription({ params }: SubscriptionProps) {
   const { id } = await params;
   const token = (await cookies()).get("api-token")?.value;
 
-  const { data: sign } = await axios.get<ISign>(`http://localhost:8080/sign/${id}`, {
+  const { data: sign } = await axios.get<ISign>(`${URL_API}/sign/${id}`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,

@@ -1,8 +1,8 @@
+const URL_API = process.env.NEXT_PUBLIC_API_URL;
 export class AuthService{
-
 async login(login: string, password: string) {
   try {
-    const res = await fetch("http://localhost:8080/auth/login", {
+    const res = await fetch(`${URL_API}/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
