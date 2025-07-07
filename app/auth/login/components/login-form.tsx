@@ -6,7 +6,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { AlertCircle, Loader2, Lock, LogIn, Mail, User2 } from "lucide-react";
+import { AlertCircle, Loader2, Lock, LogIn, User2 } from "lucide-react";
 import Form from "next/form";
 import Link from "next/link";
 import { useActionState } from "react";
@@ -35,10 +35,10 @@ const [state, login, isPending] = useActionState(loginAction, {
         </CardHeader>
 
         <CardContent>
-                    {!state.verifyReq && (
+          {!state.verifyReq && (
             <Alert variant="destructive" className="mb-4">
               <AlertCircle className="h-4 w-4" />
-              <AlertTitle>Erro ao tentar Recriar as senhas!</AlertTitle>
+              <AlertTitle>Erro ao tentar fazer login!</AlertTitle>
               <AlertDescription>{state.message}</AlertDescription>
             </Alert>
           )}

@@ -48,7 +48,7 @@ const [state, register, isPending] = useActionState(registerAction, {
                     {!state.verifyReq && (
             <Alert variant="destructive" className="mb-4">
               <AlertCircle className="h-4 w-4" />
-              <AlertTitle>Erro ao tentar Recriar as senhas!</AlertTitle>
+              <AlertTitle>Erro ao tentar cadastrar usuario!</AlertTitle>
               <AlertDescription>{state.message}</AlertDescription>
             </Alert>
           )}

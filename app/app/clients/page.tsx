@@ -3,7 +3,6 @@ import axios from "axios";
 import { cookies } from "next/headers";
 import TableClients from "./components/table-clients";
 import TableClientsMobile from "./components/table-clients-mobile";
-import { Suspense } from "react";
 
 type IParams = {
   page?: string;

@@ -28,13 +28,13 @@ export async function registerAction(_prevState: any, formData: FormData) {
    } catch (error) {
       if (axios.isAxiosError(error)) {
          return {
-            verifyReq: true,
+            verifyReq: false,
             message: error.response?.data || error.message,
             isSuccess: false,
           }
       }
       return {
-        verifyReq: true,
+        verifyReq: false,
         message: "Erro interno ao cadastrar usuario. Tente novamente mais tarde!",
         isSuccess: false,
       }

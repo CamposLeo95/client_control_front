@@ -47,13 +47,13 @@ export async function updatePassAction(_prevState: any, formData: FormData) {
       if (axios.isAxiosError(error)) {
         console.log("Axios Error:", error.response?.status, error.response?.data);
          return {
-            verifyReq: true,
+            verifyReq: false,
             message: error.response?.data || error.message,
             isSuccess: false,
           }
       }
       return {
-        verifyReq: true,
+        verifyReq: false,
         message: "Erro interno ao atualizar senha. Tente novamente mais tarde!",
         isSuccess: false,
       }

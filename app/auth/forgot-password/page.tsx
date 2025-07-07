@@ -51,7 +51,7 @@ const [state, recovery, isPending] = useActionState(recoveryPassAction, {
             {!state.verifyReq && (
             <Alert variant="destructive" className="mb-4">
               <AlertCircle className="h-4 w-4" />
-              <AlertTitle>Erro ao tentar Recriar as senhas!</AlertTitle>
+              <AlertTitle>Erro ao tentar enviar link!</AlertTitle>
               <AlertDescription>{state.message}</AlertDescription>
             </Alert>
           )}
