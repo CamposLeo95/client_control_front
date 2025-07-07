@@ -33,11 +33,18 @@ export async function loginAction(_prevState: any, formData: FormData) {
       message: "Login realizado com sucesso!",
       isSuccess: true,
     }
-    } catch (error) {
+   } catch (error) {
       if (axios.isAxiosError(error)) {
-        return error.response?.data || error.message
+         return {
+            verifyReq: true,
+            message: error.response?.data || error.message,
+            isSuccess: false,
+          }
       }
-      return "Erro interno ao criar cliente. Tente novamente mais tarde!"; 
+      return {
+        verifyReq: true,
+        message: "Erro interno ao fazer login. Tente novamente mais tarde!",
+        isSuccess: false,
+      }
     }
-
 }

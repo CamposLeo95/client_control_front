@@ -2,10 +2,11 @@
 
 import { registerAction } from "@/app/actions/auth/register"
 import FormField from "@/components/form-field"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
-import { Loader2, Lock, Mail, User, User2 } from "lucide-react"
+import { AlertCircle, Loader2, Lock, Mail, User, User2 } from "lucide-react"
 import Form from "next/form"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
@@ -44,6 +45,13 @@ const [state, register, isPending] = useActionState(registerAction, {
         </CardHeader>
 
         <CardContent>
+                    {!state.verifyReq && (
+            <Alert variant="destructive" className="mb-4">
+              <AlertCircle className="h-4 w-4" />
+              <AlertTitle>Erro ao tentar Recriar as senhas!</AlertTitle>
+              <AlertDescription>{state.message}</AlertDescription>
+            </Alert>
+          )}
           <Form action={register} className="space-y-4">
             <FormField Icon={User} name="name" id="name" placeholder="Nome" type="text" />
             <FormField Icon={Mail} name="email" id="email" placeholder="Email" type="email" />

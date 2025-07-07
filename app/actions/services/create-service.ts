@@ -32,19 +32,27 @@ export async function createService(_prevState: any, formData: FormData) {
   );
 
     if (res.status !== 201) {
-      throw new Error(`Erro ao criar serviço: ${res.status}`);
+      throw new Error(`Erro ao cadastar serviço: ${res.status}`);
     }
 
     return {
       verifyReq: true,
-      message: "Serviço criado com sucesso!",
+      message: "Serviço cadastrado com sucesso!",
       isSuccess: true,
     }
-  } catch (error) {
-  if (axios.isAxiosError(error)) {
-      return error.response?.data || error.message;
+ } catch (error) {
+      if (axios.isAxiosError(error)) {
+         return {
+            verifyReq: true,
+            message: error.response?.data || error.message,
+            isSuccess: false,
+          }
+      }
+      return {
+        verifyReq: true,
+        message: "Erro interno ao cadastrar serviço. Tente novamente mais tarde!",
+        isSuccess: false,
+      }
     }
-    return "Erro interno ao criar serviço. Tente novamente mais tarde!";
-  }
 
 }

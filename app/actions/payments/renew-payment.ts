@@ -27,27 +27,26 @@ export default async function renewPayment(_prevState: any, body: BodyProps) {
     if (res.status !== 201) {
       return {
         verifyReq: false,
-        message: "Erro ao renovar pagamento",
+        message: "Erro ao realizar pagamento",
         isSuccess: false,
       };
     }
     return {
       verifyReq: true,
-      message: "Pagamento renovado com sucesso!",
+      message: "Pagamento realizado com sucesso!",
       isSuccess: true
     };
   } catch (error) {
     if (axios.isAxiosError(error)) {
       return {
         verifyReq: false,
-        message: error.response?.data?.message || "Erro ao criar pagamento",
+        message: error.response?.data?.message || "Erro ao realizar pagamento",
         isSuccess: false,
       };
     }
-
     return {
       verifyReq: false,
-      message: "Erro ao criar pagamento",
+      message: "Erro ao realizar pagamento",
       isSuccess: false,
     };
   }
