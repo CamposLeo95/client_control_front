@@ -16,16 +16,8 @@ interface PaginationProps {
 export default function TableSubscriptionMobile({ subscriptions, page }: PaginationProps) {
   return (
     <div className="w-full px-4 block md:hidden">
-      <div className="flex items-center justify-between w-full mt-4">
-        <Link
-          href="/app/subscriptions/register"
-          prefetch={false}
-          passHref
-          className="bg-indigo-500 hover:bg-indigo-600 text-white flex items-center justify-center px-4 py-2 rounded-md text-sm"
-        >
-          <Plus className="mr-1" width={15} />
-          <span>Nova Assinatura</span>
-        </Link>
+      <div className="flex items-center justify-end w-full mt-4">
+        
 
         <FilterTable />
       </div>
