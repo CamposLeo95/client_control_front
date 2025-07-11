@@ -54,12 +54,12 @@ export default function TableClients({ clients, page }: PaginationProps) {
         <Table >
           <TableHeader>
             <TableRow className="bg-indigo-500 hover:bg-indigo-500">
-              <TableHead></TableHead>
-              <TableHead className="text-white">Nome</TableHead>
-              <TableHead className="text-white">Login</TableHead>
-              <TableHead className="text-white">Email</TableHead>
-              <TableHead className="text-white">Telefone</TableHead>
-              <TableHead className="text-white">Cadastro</TableHead>
+              <TableHead> </TableHead>
+              <TableHead className="text-white text-center">Nome</TableHead>
+              <TableHead className="text-white text-center">Login</TableHead>
+              <TableHead className="text-white text-center">Email</TableHead>
+              <TableHead className="text-white text-center">Telefone</TableHead>
+              <TableHead className="text-white text-center">Cadastro</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody className="space-y-5">
