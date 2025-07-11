@@ -9,7 +9,7 @@ export async function createClient(_prevState: any, formData: FormData) {
     const token = (await cookies()).get("api-token")?.value;
     const {name, login, phone, email, password} = Object.fromEntries(formData.entries());
 
-    if(name === "" || login === "" || phone === "" || email === "" || password === ""){
+    if(name === "" || login === "" || password === ""){
       return {
         verifyReq: false,
         message: "Todos os campos são obrigatórios!",

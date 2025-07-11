@@ -66,12 +66,12 @@ export default function TableClients({ clients, page }: PaginationProps) {
             {clients.map((item) => (
               <TableRow  key={item.id} className="cursor-pointer  hover:bg-indigo-400 hover:text-white" >
                 <TableCell  className="py-4"><Link href={`/app/clients/${item.id}`}><UserCircle className="text-2xl text-indigo-600" /></Link></TableCell>
-                <TableCell><Link href={`/app/clients/${item.id}`}>{item.name}</Link></TableCell>
-                <TableCell><Link href={`/app/clients/${item.id}`}>{item.login}</Link></TableCell>
-                <TableCell><Link href={`/app/clients/${item.id}`}>{item.email}</Link></TableCell>
-                <TableCell><Link href={`/app/clients/${item.id}`}>{formatPhoneNumber(item.phone)}</Link></TableCell>
+                <TableCell className="text-center"><Link  href={`/app/clients/${item.id}`}>{item.name ? item.name : "-"}</Link></TableCell>
+                <TableCell className="text-center"><Link href={`/app/clients/${item.id}`}>{item.login ? item.login : "-"}</Link></TableCell>
+                <TableCell className="text-center"><Link href={`/app/clients/${item.id}`}>{item.email ? item.email : "-"}</Link></TableCell>
+                <TableCell className="text-center"><Link href={`/app/clients/${item.id}`}>{item.phone ? formatPhoneNumber(item.phone) : "-"}</Link></TableCell>
                 { item.createdAt && (
-                  <TableCell><Link href={`/app/clients/${item.id}`}>{ formatterDateAPI(item.createdAt) }</Link></TableCell>
+                  <TableCell className="text-center"><Link href={`/app/clients/${item.id}`}>{ formatterDateAPI(item.createdAt) }</Link></TableCell>
                 )}
               </TableRow>
               ))}   

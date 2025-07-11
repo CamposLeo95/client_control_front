@@ -70,21 +70,17 @@ export default async function Client({ params }: ClientProps) {
               </div>
             </AccordionTrigger>
             <AccordionContent className="flex flex-col gap-3 mt-2">
-              <InfoCard icon={<User />} data={client.name} />
+              {client.name && <InfoCard icon={<User />} data={client.name} />}
 	
-              <InfoCard icon={<Mail />} data={client.email} />
+              {client.email && <InfoCard icon={<Mail />} data={client.email} />}
 
+              {client.login && <InfoCard icon={<Lock />} data={client.login} />}
 
-              <InfoCard icon={<Lock />} data={client.login} />
+              {client.phone && <InfoCard icon={<Phone />} data={formatPhoneNumber(client.phone)} />}
 
-              <InfoCard icon={<Phone />} data={formatPhoneNumber(client.phone)} />
-	
-              <InfoCard icon={<Lock />} data={<PasswordText value={client.password} />} />
+              {client.password && <InfoCard icon={<Lock />} data={<PasswordText value={client.password} />} />}
 
-
-              {client.createdAt && (
-                <InfoCard icon={<Calendar />} data={formatterDateAPI(client.createdAt)} />
-              )}
+              {client.createdAt && <InfoCard icon={<Calendar />} data={formatterDateAPI(client.createdAt)} />}
             </AccordionContent>
           </AccordionItem>
 
