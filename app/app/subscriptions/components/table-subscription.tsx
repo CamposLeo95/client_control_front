@@ -47,21 +47,21 @@ export default function TableSubscriptions({ subscriptions, page }: PaginationPr
           <TableHeader>
               <TableRow className="bg-indigo-500 hover:bg-indigo-500">
               <TableHead></TableHead>
-              <TableHead className="text-white">Cliente</TableHead>
-              <TableHead className="text-white">Serviço</TableHead>
-              <TableHead className="text-white">Valor</TableHead>
-              <TableHead className="text-white">Status</TableHead>
-              <TableHead className="text-white">Data de Expiração</TableHead>
+              <TableHead className="text-white text-center">Cliente</TableHead>
+              <TableHead className="text-white text-center">Serviço</TableHead>
+              <TableHead className="text-white text-center">Valor</TableHead>
+              <TableHead className="text-white text-center">Status</TableHead>
+              <TableHead className="text-white text-center">Data de Expiração</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody className="space-y-5">
             {subscriptions.map((item) => (
               <TableRow  key={item.id} className="cursor-pointer  hover:bg-indigo-400 hover:text-white" >
-                <TableCell  className="py-4"><Link href={`/app/subscriptions/${item.id}`}><FilePenLine className="text-2xl text-indigo-600" /></Link></TableCell> 
-                <TableCell><Link href={`/app/subscriptions/${item.id}`}>{item.client.name}</Link></TableCell>
-                <TableCell><Link href={`/app/subscriptions/${item.id}`}>{item.serviceOffering.name}</Link></TableCell> 
-                <TableCell><Link href={`/app/subscriptions/${item.id}`}>{formatterPrice(item.serviceOffering.price)}</Link></TableCell>
-                <TableCell>
+                <TableCell  className="py-4 text-center"><Link href={`/app/subscriptions/${item.id}`}><FilePenLine className="text-2xl text-indigo-600" /></Link></TableCell> 
+                <TableCell className="text-center"><Link href={`/app/subscriptions/${item.id}`}>{item.client.name}</Link></TableCell>
+                <TableCell className="text-center"><Link href={`/app/subscriptions/${item.id}`}>{item.serviceOffering.name}</Link></TableCell> 
+                <TableCell className="text-center"><Link href={`/app/subscriptions/${item.id}`}>{formatterPrice(item.serviceOffering.price)}</Link></TableCell>
+                <TableCell className="text-center">
                   <Link href={`/app/subscriptions/${item.id}`}>
                     <BadgeTable isActive={item?.activeSign} />
                   </Link>

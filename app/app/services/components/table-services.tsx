@@ -54,16 +54,16 @@ export default function TableServices({ services, page }: PaginationProps) {
           <TableHeader>
             <TableRow className="bg-indigo-500 hover:bg-indigo-500">
               <TableHead></TableHead>
-              <TableHead className="text-white">Nome</TableHead>
-              <TableHead className="text-white">Preço</TableHead>
+              <TableHead className="text-white text-center">Nome</TableHead>
+              <TableHead className="text-white text-center">Preço</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody className="space-y-5">
             {services.map((item) => (
               <TableRow  key={item.id} className="cursor-pointer  hover:bg-indigo-400 hover:text-white" >
-                <TableCell className="py-4 uppercase"><Link href={`/app/services/${item.id}`}><BriefcaseBusiness className="text-2xl text-indigo-600" /></Link></TableCell>
-                <TableCell className="py-4 uppercase"><Link href={`/app/services/${item.id}`}>{item.name}</Link></TableCell>
-                <TableCell><Link href={`/app/services/${item.id}`}>{formatterPrice(item.price)}</Link></TableCell>
+                <TableCell className="py-4 uppercase text-center"><Link href={`/app/services/${item.id}`}><BriefcaseBusiness className="text-2xl text-indigo-600" /></Link></TableCell>
+                <TableCell className="py-4 uppercase text-center"><Link href={`/app/services/${item.id}`}>{item.name}</Link></TableCell>
+                <TableCell className="text-center"><Link href={`/app/services/${item.id}`}>{formatterPrice(item.price)}</Link></TableCell>
               </TableRow>
               ))}   
           </TableBody>

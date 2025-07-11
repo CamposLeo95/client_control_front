@@ -56,28 +56,28 @@ export default function TablePayments({ payments, page }: PaginationProps) {
           <TableHeader>
             <TableRow className="bg-indigo-500 hover:bg-indigo-500">
               <TableHead></TableHead>
-              <TableHead className="text-white">Cliente</TableHead>
-              <TableHead className="text-white">Status Assinatura</TableHead>
-              <TableHead className="text-white">Valor</TableHead>
-              <TableHead className="text-white">Data Pagamento</TableHead>
+              <TableHead className="text-white text-center">Cliente</TableHead>
+              <TableHead className="text-white text-center">Status Assinatura</TableHead>
+              <TableHead className="text-white text-center">Valor</TableHead>
+              <TableHead className="text-white text-center">Data Pagamento</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody className="space-y-5">
             {payments.map((item) => (
               <TableRow  key={item.id} className="cursor-pointer  hover:bg-indigo-400 hover:text-white" >
                 <TableCell  className="py-4"><Link href={`/app/payments/${item.id}`}><CircleDollarSignIcon className="text-2xl text-indigo-600" /></Link></TableCell>
-                <TableCell><Link href={`/app/payments/${item.id}`}>{item.client.name}</Link></TableCell>
-                <TableCell >
+                <TableCell className="text-center"><Link href={`/app/payments/${item.id}`}>{item.client.name}</Link></TableCell>
+                <TableCell className="text-center">
                   <Link href={`/app/payments/${item.id}`}>
                     <BadgeTable isActive={item?.sign?.activeSign} />
                   </Link>
                 </TableCell>
-                <TableCell>
+                <TableCell className="text-center">
                   <Link href={`/app/payments/${item.id}`}>
                      { formatterPrice(item.value)}
                   </Link>
                 </TableCell>
-                <TableCell>
+                <TableCell className="text-center">
                   <Link href={`/app/payments/${item.id}`}>
                      { item.createdAt && formatterDateAPI(item.createdAt) }
                   </Link>
