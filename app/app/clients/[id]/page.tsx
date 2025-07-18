@@ -17,8 +17,10 @@ import Link from "next/link";
 import InfoCardClient from "../components/info-card-client";
 import PasswordText from "../components/password-text";
 import InfoCard from "@/components/info-card";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import BadgeTable from "@/components/badge-table";
+import { Button } from "@/components/ui/button";
+import getClientById from "@/app/actions/clients/client-id";
 
 const URL_API = process.env.NEXT_PUBLIC_API_URL;
 
@@ -30,12 +32,7 @@ export default async function Client({ params }: ClientProps) {
   const { id } = await params;
   const token = (await cookies()).get("api-token")?.value;
 
-  const { data: client } = await axios.get<IClient>(`${URL_API}/client/${id}`, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  const client = await getClientById(id);
 
   const { data: signs } = await axios.get<ISign[]>(`${URL_API}/sign?client=${client.name}`, {
     headers: {
@@ -139,6 +136,13 @@ export default async function Client({ params }: ClientProps) {
           )}
         </Accordion>
         </CardContent>
+        <CardFooter className="flex ">
+          <Link href={`/app/clients/update/${client.id}`} className="w-full rounded-lg bg-indigo-500 hover:bg-indigo-600 text-white">
+            <Button variant="outline" className="w-full cursor-pointer ">
+              Atualizar Cliente
+            </Button>
+          </Link>
+        </CardFooter>
       </Card>
     </div>
   );

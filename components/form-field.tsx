@@ -1,4 +1,5 @@
-import { Input } from "./ui/input";
+'use client'
+import { useState } from "react";
 import { Label } from "./ui/label";
 
 interface FormFieldProps {
@@ -8,9 +9,11 @@ interface FormFieldProps {
   label?: string;
   type?: string;
   Icon: React.ElementType;
+  initialValue?: string;
 }
 
- export default function FormField ({id, name,placeholder, type = "text",Icon, label}: FormFieldProps) {
+ export default function FormField ({id, name,placeholder, type = "text",Icon, label, initialValue}: FormFieldProps) {
+  const [inputValue, setInputValue] = useState(initialValue || "");
     return ( 
     <div className="space-y-1">
       <Label htmlFor={id}>{label}</Label>
@@ -21,6 +24,8 @@ interface FormFieldProps {
           name={name}
           placeholder={placeholder}
           type={type}
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
           className="w-full p-1 outline-none border-none px-0 shadow-none focus-visible:ring-0 placeholder:font-normal"
         />
       </div>
