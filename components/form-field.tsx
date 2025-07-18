@@ -9,7 +9,7 @@ interface FormFieldProps {
   label?: string;
   type?: string;
   Icon: React.ElementType;
-  initialValue?: string;
+  initialValue?: string | number;
 }
 
  export default function FormField ({id, name,placeholder, type = "text",Icon, label, initialValue}: FormFieldProps) {

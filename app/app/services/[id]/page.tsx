@@ -11,7 +11,9 @@ import formatterPrice from "@/app/utils/formmatter-price";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import InfoRow from "@/components/info-row";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import getServiceById from "@/app/actions/services/service-id";
 
 const URL_API = process.env.NEXT_PUBLIC_API_URL;
 
@@ -21,14 +23,8 @@ interface ClientProps {
 
 export default async function Service({ params }: ClientProps) {
   const { id } = await params;
-  const token = (await cookies()).get("api-token")?.value;
 
-  const { data: service } = await axios.get<IService>(`${URL_API}/service-offerring/${id}`, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  const service = await getServiceById(id);
 
   return (
     <div className="flex flex-col items-center gap-8">
@@ -53,6 +49,13 @@ export default async function Service({ params }: ClientProps) {
           <InfoRow icon={<CircleDollarSignIcon />} label="Valor" value={formatterPrice(service.price)} />
         </div>
         </CardContent>
+        <CardFooter className="flex ">
+          <Link href={`/app/services/update/${service.id}`} className="w-full rounded-lg bg-indigo-500 hover:bg-indigo-600 text-white">
+            <Button variant="outline" className="w-full cursor-pointer ">
+              Atualizar Serviço
+            </Button>
+          </Link>
+        </CardFooter>
       </Card>
     </div>
   );
