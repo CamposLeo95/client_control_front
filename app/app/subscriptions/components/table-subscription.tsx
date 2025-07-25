@@ -61,12 +61,12 @@ export default function TableSubscriptions({ subscriptions, page }: PaginationPr
                 <TableCell className="text-center"><Link href={`/app/subscriptions/${item.id}`}>{item.client.name}</Link></TableCell>
                 <TableCell className="text-center"><Link href={`/app/subscriptions/${item.id}`}>{item.serviceOffering.name}</Link></TableCell> 
                 <TableCell className="text-center"><Link href={`/app/subscriptions/${item.id}`}>{formatterPrice(item.serviceOffering.price)}</Link></TableCell>
-                <TableCell className="text-center">
+                <TableCell className="flex items-center justify-center">
                   <Link href={`/app/subscriptions/${item.id}`}>
                     <BadgeTable isActive={item?.activeSign} />
                   </Link>
                 </TableCell>
-                <TableCell><Link href={`/app/subscriptions/${item.id}`}>{formatterDateAPI(item.expireDate)}</Link></TableCell> 
+                <TableCell className="text-center"><Link href={`/app/subscriptions/${item.id}`}>{formatterDateAPI(item.expireDate)}</Link></TableCell> 
               </TableRow>
               ))}   
           </TableBody>

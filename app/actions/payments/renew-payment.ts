@@ -7,6 +7,7 @@ type BodyProps = {
   signId: number;
   valueService: number;
   description?: string;
+  manualDate?: string | null;
 }
 
 export default async function renewPayment(_prevState: any, body: BodyProps) {
@@ -17,6 +18,7 @@ export default async function renewPayment(_prevState: any, body: BodyProps) {
       sign_id: body.signId,
       value: body.valueService,
       description: body.description,
+      manual_date: body.manualDate,
     }, {
         headers: {
           "Content-Type": "application/json",

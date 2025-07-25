@@ -18,10 +18,14 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
-import { AlertCircle, BriefcaseBusiness, CircleDollarSign, DollarSign, Loader2, User } from "lucide-react";
+import { AlertCircle, BriefcaseBusiness, CalendarIcon, CircleDollarSign, DollarSign, Loader2, User } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { startTransition, useActionState, useEffect, useState } from "react";
+import { ptBR } from "date-fns/locale";
+import { format } from "date-fns";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
 
 interface FormUpdatePaymentProps {
   subscription: ISign;
@@ -31,6 +35,7 @@ export default function FormUpdatePayment({ subscription }: FormUpdatePaymentPro
   const [valueService, setValueService] = useState<number>(0);
   const [totalMonths, setTotalMonths] = useState<number>(1);
   const [description, setDescription] = useState<string>("");
+  const [date, setDate] = useState<Date>();
 
   const { push } = useRouter();
   const [state, paymentAction, isPending] = useActionState(renewPayment, {
@@ -46,6 +51,7 @@ export default function FormUpdatePayment({ subscription }: FormUpdatePaymentPro
       signId: subscription.id,
       valueService,
       description,
+      manualDate: date ? format(date, "yyyy-MM-dd") : null,
     });
   }
 
@@ -146,6 +152,23 @@ export default function FormUpdatePayment({ subscription }: FormUpdatePaymentPro
             </div>
           </div>
         </div>
+         <div className="mt-4">
+              <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  data-empty={!date}
+                  className="data-[empty=true]:text-muted-foreground py-5 justify-start text-left font-normal cursor-pointer w-full text-indigo-400  hover:text-indigo-500 font-semibold"
+                >
+                  <CalendarIcon className="text-indigo-600" />
+                  {date ? format(date, "P", { locale: ptBR }) : <span>Selecione uma data</span>}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0">
+                <Calendar mode="single" selected={date} onSelect={setDate} />
+              </PopoverContent>
+            </Popover>
+            </div>
 
         <div className="mt-4">
           <Label htmlFor="description" >Descrição</Label>

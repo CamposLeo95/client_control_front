@@ -7,6 +7,7 @@ export type ISign = {
   expireDate: [number, number, number];
   client: IClient;
   serviceOffering: IService;
+  description: string;
 }
 
 export type ISignToPayment = {

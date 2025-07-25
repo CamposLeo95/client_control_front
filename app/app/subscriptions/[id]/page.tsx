@@ -4,10 +4,12 @@ import {
   ArrowLeft,
   BriefcaseBusiness,
   CircleDollarSignIcon,
+  Edit,
   FileArchive,
   Info,
   Lock,
   Mail,
+  Pen,
   Phone,
   TriangleAlert,
   User
@@ -29,23 +31,16 @@ import ToggleForm from "../components/toggle-form";
 import InfoRow from "@/components/info-row";
 import InfoToggleRow from "@/components/info-toggle-row";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import getSubscriptionById from "@/app/actions/subscriptions/find-subscription-id";
+import { Label } from "@/components/ui/label";
 
 interface SubscriptionProps {
   params: Promise<{ id: string }>;
 }
 
-const URL_API = process.env.NEXT_PUBLIC_API_URL;
-
 export default async function Subscription({ params }: SubscriptionProps) {
   const { id } = await params;
-  const token = (await cookies()).get("api-token")?.value;
-
-  const { data: sign } = await axios.get<ISign>(`${URL_API}/sign/${id}`, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  const sign = await getSubscriptionById(id);
 
   return (
     <div className="flex flex-col items-center gap-8">
@@ -75,6 +70,23 @@ export default async function Subscription({ params }: SubscriptionProps) {
             icon={<TriangleAlert />} label="Data de expiração"
             content={formatterDateAPI(sign.expireDate)}
           />
+          <InfoToggleRow
+            icon={<Info />} label="Descrição"
+            content={
+            <Link href={`/app/subscriptions/${sign.id}/edit-description`}>
+              <Edit className="text-indigo-400 mr-2" width={23} />
+            </Link>
+            }
+          />
+          {sign?.description &&(
+             <Link href={`/app/subscriptions/${sign.id}/edit-description`}>
+              <div
+                className="flex items-center gap-2 border rounded-md px-3 py-2 bg-secondary text-indigo-400 font-semibold"
+              >
+                {sign?.description}
+              </div>
+            </Link>
+          )}
         <Separator className="my-4" />
           {/* Accordions */}
           <Accordion type="single" collapsible>

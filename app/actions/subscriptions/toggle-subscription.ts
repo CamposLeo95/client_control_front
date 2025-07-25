@@ -5,7 +5,7 @@ import { cookies } from "next/headers";
 const URL_API = process.env.NEXT_PUBLIC_API_URL;
 
 export async function toggleSubscription(prevState: any, _formData: FormData) {
-  const token = await (await cookies()).get("api-token")?.value;
+  const token = (await cookies()).get("api-token")?.value;
 
   try {
     const res = await axios.put(`${URL_API}/sign/toggle/${prevState.id}`, {}, {

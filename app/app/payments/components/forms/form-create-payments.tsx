@@ -8,9 +8,10 @@ import { Combobox } from "@/components/combobox";
 import TitleForm from "@/components/title-form";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import {
   Select,
   SelectContent,
@@ -20,18 +21,20 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
+import { format } from "date-fns";
 import {
   AlertCircle,
   BriefcaseBusiness,
+  CalendarIcon,
   CircleDollarSign,
-  Coins,
   DollarSign,
   Loader2,
-  User,
+  User
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { startTransition, useActionState, useEffect, useState } from "react";
+import { ptBR } from "date-fns/locale";
 
 type DropDown = {
   value: number;
@@ -49,6 +52,7 @@ export default function FormCreatePayment({ clients, services }: FormCreatePayme
   const [valueService, setValueService] = useState<number>(0);
   const [totalMonths, setTotalMonths] = useState<number>(1);
   const [description, setDescription] = useState<string>("");
+  const [date, setDate] = useState<Date>()
 
   const { push } = useRouter();
   const [state, paymentAction, isPending] = useActionState(createPayment, {
@@ -75,6 +79,7 @@ export default function FormCreatePayment({ clients, services }: FormCreatePayme
       serviceId: serviceId?.value || null,
       valueService,
       description,
+      manualDate: date ? format(date, "yyyy-MM-dd") : null,
     });
   }
 
@@ -158,6 +163,23 @@ export default function FormCreatePayment({ clients, services }: FormCreatePayme
               />
             </div>
           </div>
+    </div>
+    <div className="mt-4">
+      <Popover>
+      <PopoverTrigger asChild>
+        <Button
+          variant="outline"
+          data-empty={!date}
+          className="data-[empty=true]:text-muted-foreground py-5 justify-start text-left font-normal cursor-pointer w-full text-indigo-400  hover:text-indigo-500 font-semibold"
+        >
+          <CalendarIcon className="text-indigo-600" />
+          {date ? format(date, "P", { locale: ptBR }) : <span>Selecione uma data</span>}
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-auto p-0">
+        <Calendar mode="single" selected={date} onSelect={setDate} />
+      </PopoverContent>
+    </Popover>
     </div>
         <div className="mt-4">
           <Label htmlFor="description" >Descrição</Label>

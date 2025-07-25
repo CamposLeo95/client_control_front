@@ -8,11 +8,12 @@ type BodyProps = {
   serviceId: number | null;
   valueService: number;
   description?: string;
+  manualDate?: string | null;
 }
 
 export default async function createPayment(_prevState: any, body: BodyProps) {
   const token = (await cookies()).get("api-token")?.value;
-
+  
   if (!body.clientId) {
     return {
       verifyReq: false,
@@ -35,6 +36,8 @@ export default async function createPayment(_prevState: any, body: BodyProps) {
       serviceOffering_id: body.serviceId,
       value: body.valueService,
       description: body.description,
+      manual_date: body.manualDate,
+      
     }, {
         headers: {
           "Content-Type": "application/json",
