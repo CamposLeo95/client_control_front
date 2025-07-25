@@ -12,7 +12,6 @@ interface InputSearchProps {
 }
 
 export default function InputSearch({filterName,value, setValue, route}:InputSearchProps) {
-  const pathname = usePathname()
   const searchParams = useSearchParams()
   const {replace} = useRouter()
 

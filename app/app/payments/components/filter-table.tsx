@@ -26,7 +26,7 @@ export default function FilterTable () {
         params.delete("startDate");
         params.delete("endDate");
         params.delete("all");
-        replace(`/app/clients`);
+        replace(`/app/payments`);
     }
   return (
     <>
