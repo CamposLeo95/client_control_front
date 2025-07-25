@@ -11,7 +11,6 @@ import InputDate from "./input-date";
 export default function FilterTable () {
   const searchParams = useSearchParams()
   const { replace } = useRouter();
-  const pathname = usePathname()
 
     const [startDate, setStartDate] = useState<Date | undefined>(undefined)
     const [endDate, setEndDate] = useState<Date | undefined>(undefined)
@@ -25,9 +24,10 @@ export default function FilterTable () {
         const params = new URLSearchParams(searchParams);
         params.delete("startDate");
         params.delete("endDate");
-        params.delete("client");
+        params.delete("all");
         replace(`/app/subscriptions`);
     }
+
   return (
     <>
     <DropdownMenu>
@@ -41,7 +41,7 @@ export default function FilterTable () {
         <DropdownMenuLabel>Filtros</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <div className=" w-64 flex flex-col p-2 items-center justify-between gap-4">
-            <InputSearch filterName="client" route="/app/subscriptions" value={client} setValue={setClient} /> 
+            <InputSearch filterName="all" route="/app/subscriptions" value={client} setValue={setClient} /> 
             <InputDate typeDate="startDate" date={startDate} setDate={setStartDate} /> 
             <InputDate typeDate="endDate" date={endDate} setDate={setEndDate} />
         </div>

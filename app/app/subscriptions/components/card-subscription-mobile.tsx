@@ -27,7 +27,9 @@ export default function CardsSubscriptionMobile({ subscription }: ICardsSubscrip
 
           {subscription.expireDate && (
             <p className={cn("text-xs text-zinc-500 italic min-w-[80px] text-right flex flex-col", checkDateExpired(subscription.expireDate) ? "text-red-500 " : "text-green-500 ")}>
-              <span>{`${checkDateExpired(subscription.expireDate) ? "Expirado" : "Expira em:"}`}</span>
+              <span>
+                {`${checkDateExpired(subscription.expireDate) ? "Expirado" : "Expira em:"}`}
+              </span>
               {formatterDateAPI(subscription.expireDate)}
             </p>
           )}

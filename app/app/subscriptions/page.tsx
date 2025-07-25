@@ -8,7 +8,7 @@ import TableSubscriptionMobile from "./components/table-subscription-mobile";
 type IParams = {
   page?: string;
   size?: string;
-  client?: string;
+  all?: string;
   startDate?: string;
   endDate?: string;
 }
@@ -30,7 +30,7 @@ export default async function SubscriptionPage({ searchParams }: Props) {
     params: {
       page: searchParamsRes.page || 0,
       size: 7,
-      client: searchParamsRes.client || "",
+      all: searchParamsRes.all || "",
       startDate: searchParamsRes.startDate || "2000-01-01",
       endDate: searchParamsRes.endDate || "3000-01-01",
     }

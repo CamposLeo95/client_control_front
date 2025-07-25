@@ -1,8 +1,8 @@
 
-import { formatterDateAPI } from "@/app/utils/formatter-date";
+import { checkDateExpired, formatterDateAPI } from "@/app/utils/formatter-date";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Check, CheckCircle, CircleCheck, FileArchive, FilePenLine, UserCircle, X } from "lucide-react";
+import { AlertCircle, AlertOctagon, Check, CheckCircle, CircleCheck, FileArchive, FilePenLine, UserCircle, X } from "lucide-react";
 
 import { ISign } from "@/app/types/sign.type";
 import formatterPrice from "@/app/utils/formmatter-price";
@@ -66,7 +66,29 @@ export default function TableSubscriptions({ subscriptions, page }: PaginationPr
                     <BadgeTable isActive={item?.activeSign} />
                   </Link>
                 </TableCell>
-                <TableCell className="text-center"><Link href={`/app/subscriptions/${item.id}`}>{formatterDateAPI(item.expireDate)}</Link></TableCell> 
+                <TableCell className="text-center">
+                  <Link href={`/app/subscriptions/${item.id}`}>
+                  
+                  <span>
+                    <span>{!checkDateExpired(item.expireDate) 
+                      ? <div className="flex items-center justify-center gap-2 text-green-600">
+                          <CheckCircle width={14}  /> 
+                          <span>
+                            {formatterDateAPI(item.expireDate)}
+                          </span>
+                        </div>
+                      : <div className="flex items-center justify-center gap-2 text-red-500">
+                          <AlertOctagon width={14}  />
+                          <span>
+                            {formatterDateAPI(item.expireDate)}
+                          </span>
+                        </div>
+                    }</span>
+                  </span>
+                  
+                 
+                  </Link>
+                </TableCell> 
               </TableRow>
               ))}   
           </TableBody>
