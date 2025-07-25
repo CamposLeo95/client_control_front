@@ -1,39 +1,36 @@
+import getSubscriptionById from "@/app/actions/subscriptions/find-subscription-id";
+import { checkDateExpired, formatterDateAPI } from "@/app/utils/formatter-date";
 import { formatPhoneNumber } from "@/app/utils/formatter-phone";
-import axios from "axios";
-import {
-  ArrowLeft,
-  BriefcaseBusiness,
-  CircleDollarSignIcon,
-  Edit,
-  FileArchive,
-  Info,
-  Lock,
-  Mail,
-  Pen,
-  Phone,
-  PlusSquare,
-  TriangleAlert,
-  User
-} from "lucide-react";
-import { cookies } from "next/headers";
-import { ISign } from "@/app/types/sign.type";
-import { formatterDateAPI } from "@/app/utils/formatter-date";
 import formatterPrice from "@/app/utils/formmatter-price";
 import InfoCard from "@/components/info-card";
+import InfoRow from "@/components/info-row";
+import InfoToggleRow from "@/components/info-toggle-row";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger
 } from "@/components/ui/accordion";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import {
+  AlertOctagon,
+  ArrowLeft,
+  BriefcaseBusiness,
+  CheckCircle,
+  CircleDollarSignIcon,
+  Edit,
+  FileArchive,
+  Info,
+  Lock,
+  Mail,
+  Phone,
+  PlusSquare,
+  TriangleAlert,
+  User
+} from "lucide-react";
 import Link from "next/link";
 import ToggleForm from "../components/toggle-form";
-import InfoRow from "@/components/info-row";
-import InfoToggleRow from "@/components/info-toggle-row";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import getSubscriptionById from "@/app/actions/subscriptions/find-subscription-id";
-import { Label } from "@/components/ui/label";
 
 interface SubscriptionProps {
   params: Promise<{ id: string }>;
@@ -69,7 +66,24 @@ export default async function Subscription({ params }: SubscriptionProps) {
 
           <InfoToggleRow
             icon={<TriangleAlert />} label="Data de expiração"
-            content={formatterDateAPI(sign.expireDate)}
+            content={
+              <span>
+                <span>{!checkDateExpired(sign.expireDate) 
+                  ? <div className="flex items-center justify-center gap-2 text-green-600">
+                      <CheckCircle width={14}  /> 
+                      <span>
+                        {formatterDateAPI(sign.expireDate)}
+                      </span>
+                    </div>
+                  : <div className="flex items-center justify-center gap-2 text-red-500">
+                      <AlertOctagon width={14}  />
+                      <span>
+                        {formatterDateAPI(sign.expireDate)}
+                      </span>
+                    </div>
+                }</span>
+              </span>
+            }
           />
           <InfoToggleRow
             icon={<Info />} label="Descrição"
