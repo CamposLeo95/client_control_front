@@ -11,6 +11,7 @@ import {
   Mail,
   Pen,
   Phone,
+  PlusSquare,
   TriangleAlert,
   User
 } from "lucide-react";
@@ -74,7 +75,19 @@ export default async function Subscription({ params }: SubscriptionProps) {
             icon={<Info />} label="Descrição"
             content={
             <Link href={`/app/subscriptions/${sign.id}/edit-description`}>
-              <Edit className="text-indigo-400 mr-2" width={23} />
+              {sign.description 
+              ? (
+                <div className="flex text-md text-indigo-400 mr-2 font-medium items-center gap-2">
+                  <Edit width={23} />
+                  <span> Editar</span>
+                </div>
+              ) 
+              : (
+                <div className="flex text-md text-indigo-400 mr-2 font-medium items-center gap-2">
+                  <PlusSquare width={23} />
+                  <span> Adicionar</span>
+                </div>
+              ) }
             </Link>
             }
           />
