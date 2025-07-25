@@ -11,7 +11,8 @@ import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 import Link from "next/link";
 import FilterTable from "./filter-table";
-import { PaginationTableClient } from "./pagination-client";
+import { PaginationTablePayment } from "./pagination-payment";
+
 
 interface PaginationProps {
   payments: IPayment[];
@@ -89,7 +90,7 @@ export default function TablePayments({ payments, page }: PaginationProps) {
           </TableBody>
         </Table>)}
       </CardContent>
-      <PaginationTableClient page={page} />
+      <PaginationTablePayment page={page} />
     </Card>
   )
 }

@@ -7,13 +7,13 @@ import {
   PaginationLink
 } from "@/components/ui/pagination";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
 interface IPaginationTableProps {
   page: string | number;  
 }
 
-export function PaginationTableClient({ page }: IPaginationTableProps) {
+export function PaginationTablePayment({ page }: IPaginationTableProps) {
   const searchParams = useSearchParams();
   
   const getQueryString = (newPage: number) => {
@@ -21,43 +21,35 @@ export function PaginationTableClient({ page }: IPaginationTableProps) {
     params.set("page", newPage.toString());
     return params.toString() ? `?${params.toString()}` : "";
   };
+
   return (
     <Pagination>
       <PaginationContent>
-        { +page > 0 && (
-        <PaginationItem>
-          <Link href={`/app/clients?${getQueryString(+page - 1)}`} >
-
-              Voltar
-
-          </Link>
-                    
-        </PaginationItem>
-        )}
-        { +page > 0 && (
+        {+page > 0 && (
           <PaginationItem>
-            <PaginationLink href={`/app/clients${getQueryString(+page - 1)}`}>{+page - 1}</PaginationLink>
+            <Link href={`/app/payments${getQueryString(+page - 1)}`}>Voltar</Link>
+          </PaginationItem>
+        )}
+        {+page > 0 && (
+          <PaginationItem>
+            <PaginationLink href={`/app/payments${getQueryString(+page - 1)}`}>{+page - 1}</PaginationLink>
           </PaginationItem>
         )}
         <PaginationItem>
-          <PaginationLink href={`/app/clients${getQueryString(+page)}`} isActive>
-           {+page}
+          <PaginationLink href={`/app/payments${getQueryString(+page)}`} isActive>
+            {+page}
           </PaginationLink>
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink href={`/app/clients${getQueryString(+page + 1)}`}>{+page + 1}</PaginationLink>
+          <PaginationLink href={`/app/payments${getQueryString(+page + 1)}`}>{+page + 1}</PaginationLink>
         </PaginationItem>
         <PaginationItem>
           <PaginationEllipsis />
         </PaginationItem>
         <PaginationItem>
-          <Link href={`/app/clients${getQueryString(+page + 1)}`} >
-
-              Avançar
-
-          </Link>
+          <Link href={`/app/payments${getQueryString(+page + 1)}`}>Avançar</Link>
         </PaginationItem>
       </PaginationContent>
     </Pagination>
-  )
+  );
 }

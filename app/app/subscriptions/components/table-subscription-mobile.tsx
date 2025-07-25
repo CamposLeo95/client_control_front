@@ -4,8 +4,9 @@ import { Plus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import FilterTable from "./filter-table";
-import { PaginationTableClient } from "./pagination-client";
+
 import CardsSubscriptionMobile from "./card-subscription-mobile";
+import { PaginationTableSubscription } from "./pagination-subscription";
 
 
 interface PaginationProps {
@@ -38,7 +39,7 @@ export default function TableSubscriptionMobile({ subscriptions, page }: Paginat
       </div>
 
       <div className="mt-6">
-        <PaginationTableClient page={page} />
+        <PaginationTableSubscription page={page} />
       </div>
     </div>
   );

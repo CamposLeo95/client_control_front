@@ -24,6 +24,7 @@ export default function InputSearch({filterName,value, setValue, route}:InputSea
       setValue?.("");
       params.delete(filterName);
     }
+    params.set("page", "0");
     replace(`${route}?${params.toString()}`)
   }
 

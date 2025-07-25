@@ -11,8 +11,9 @@ import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 import Link from "next/link";
 import FilterTable from "./filter-table";
-import { PaginationTableClient } from "./pagination-client";
+
 import BadgeTable from "@/components/badge-table";
+import { PaginationTableSubscription } from "./pagination-subscription";
 
 interface PaginationProps {
   subscriptions: ISign[];
@@ -87,8 +88,7 @@ export default function TableSubscriptions({ subscriptions, page }: PaginationPr
                         </div>
                     }</span>
                   </span>
-                  
-                 
+            
                   </Link>
                 </TableCell> 
               </TableRow>
@@ -96,7 +96,7 @@ export default function TableSubscriptions({ subscriptions, page }: PaginationPr
           </TableBody>
         </Table>)}
       </CardContent>
-      <PaginationTableClient page={page} />
+      <PaginationTableSubscription page={page} />
     </Card>
   )
 }
