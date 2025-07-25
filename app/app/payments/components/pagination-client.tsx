@@ -19,7 +19,7 @@ export function PaginationTableClient({ page }: IPaginationTableProps) {
       <PaginationContent>
         { +page > 0 && (
         <PaginationItem>
-          <Link href={`/app/clients?page=${+page - 1}`} >
+          <Link href={`/app/payments?page=${+page - 1}`} >
 
               Voltar
 
@@ -29,22 +29,22 @@ export function PaginationTableClient({ page }: IPaginationTableProps) {
         )}
         { +page > 0 && (
           <PaginationItem>
-            <PaginationLink href={`/app/clients?page=${+page - 1}`}>{+page - 1}</PaginationLink>
+            <PaginationLink href={`/app/payments?page=${+page - 1}`}>{+page - 1}</PaginationLink>
           </PaginationItem>
         )}
         <PaginationItem>
-          <PaginationLink href={`/app/clients?page=${+page}`} isActive>
+          <PaginationLink href={`/app/payments?page=${+page}`} isActive>
            {+page}
           </PaginationLink>
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink href={`/app/clients?page=${+page + 1}`}>{+page + 1}</PaginationLink>
+          <PaginationLink href={`/app/payments?page=${+page + 1}`}>{+page + 1}</PaginationLink>
         </PaginationItem>
         <PaginationItem>
           <PaginationEllipsis />
         </PaginationItem>
         <PaginationItem>
-          <Link href={`/app/clients?page=${+page + 1}`} > 
+          <Link href={`/app/payments?page=${+page + 1}`} >
 
               Avançar
 
