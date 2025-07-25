@@ -22,7 +22,7 @@ export default function ToggleForm({ id, checked }: { id: number; checked: boole
  } , [state]);
 
   return (
-    <Form action={toggleAction} className="flex items-center gap-2">
+    <Form action={toggleAction} className="flex items-center gap-2 cursor-pointer">
       <Switch checked={checked} type="submit"  />
     </Form>
   );
