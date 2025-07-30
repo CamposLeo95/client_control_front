@@ -5,11 +5,11 @@ import { BriefcaseBusiness, Handshake, Plus } from "lucide-react";
 
 import { IService } from "@/app/types/services.type";
 import formatterPrice from "@/app/utils/formmatter-price";
+import { PaginationTable } from "@/components/pagination";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 import Link from "next/link";
 import FilterTableServices from "./filter-table";
-import { PaginationTableService } from "./pagination-services";
 
 interface PaginationProps {
   services: IService[];
@@ -69,7 +69,7 @@ export default function TableServices({ services, page }: PaginationProps) {
           </TableBody>
         </Table>)}
       </CardContent>
-      <PaginationTableService page={page} />
+      <PaginationTable route="/app/services" page={page} />
     </Card>
   )
 }

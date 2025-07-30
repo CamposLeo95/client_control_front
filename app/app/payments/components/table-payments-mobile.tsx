@@ -1,11 +1,11 @@
 import { IPayment } from "@/app/types/payment";
+import { PaginationTable } from "@/components/pagination";
 import { Separator } from "@/components/ui/separator";
 import { Plus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import CardsPaymentMobile from "./cards-payment-mobile";
 import FilterTable from "./filter-table";
-import { PaginationTablePayment } from "./pagination-payment";
 
 
 interface PaginationProps {
@@ -44,7 +44,7 @@ export default function TablePaymentsMobile({ payments, page }: PaginationProps)
       </div>
 
       <div className="mt-6">
-        <PaginationTablePayment page={page} />
+        <PaginationTable route="/app/payments" page={page} />
       </div>
     </div>
   );

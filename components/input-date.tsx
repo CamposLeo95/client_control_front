@@ -20,7 +20,7 @@ export default function InputDate({ typeDate, date, setDate }: InputDateProps) {
   const {replace} = useRouter()
 
   const [open, setOpen] = useState(false)
-  
+
   const textDate = typeDate === "startDate" ? "Data Inicial" : "Data Final";
 
   const handleSelect = (date: Date | undefined) => {

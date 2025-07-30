@@ -6,9 +6,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 // import { PaginationTableClient } from "./pagination-client";
+import { PaginationTable } from "@/components/pagination";
 import CardServiceMobile from "./cards-service-mobile";
 import FilterTableServices from "./filter-table";
-import { PaginationTableService } from "./pagination-services";
 
 interface PaginationProps {
   services: IService[];
@@ -45,7 +45,7 @@ export default function TableServicesMobile({ services, page }: PaginationProps)
           ))
         )}
         </div>
-      <PaginationTableService page={page} />
+      <PaginationTable route="/app/services" page={page} />
     </div>
   )
 }

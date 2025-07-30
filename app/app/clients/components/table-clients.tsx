@@ -6,11 +6,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Plus, User, UserCircle } from "lucide-react";
 
+
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 import Link from "next/link";
 import FilterTable from "./filter-table";
-import { PaginationTableClient } from "./pagination-client";
+import { PaginationTable } from "@/components/pagination";
+
 
 interface PaginationProps {
   clients: IClient[];
@@ -78,7 +80,7 @@ export default function TableClients({ clients, page }: PaginationProps) {
           </TableBody>
         </Table>)}
       </CardContent>
-      <PaginationTableClient page={page} />
+      <PaginationTable route="/app/clients" page={page} />
     </Card>
   )
 }

@@ -1,11 +1,12 @@
 'use client';
+import InputDate from "@/components/input-date";
 import InputSearch from "@/components/input-search";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { BrushCleaning, Filter } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
-import InputDate from "./input-date";
+
 
 
 export default function FilterTable () {

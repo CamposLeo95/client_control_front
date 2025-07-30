@@ -2,18 +2,17 @@
 import { checkDateExpired, formatterDateAPI } from "@/app/utils/formatter-date";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { AlertCircle, AlertOctagon, Check, CheckCircle, CircleCheck, FileArchive, FilePenLine, UserCircle, X } from "lucide-react";
+import { AlertOctagon, CheckCircle, FileArchive, FilePenLine } from "lucide-react";
 
 import { ISign } from "@/app/types/sign.type";
 import formatterPrice from "@/app/utils/formmatter-price";
-import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 import Link from "next/link";
 import FilterTable from "./filter-table";
 
 import BadgeTable from "@/components/badge-table";
-import { PaginationTableSubscription } from "./pagination-subscription";
+import { PaginationTable } from "@/components/pagination";
 
 interface PaginationProps {
   subscriptions: ISign[];
@@ -71,7 +70,6 @@ export default function TableSubscriptions({ subscriptions, page }: PaginationPr
                 </TableCell>
                 <TableCell className="text-center">
                   <Link href={`/app/subscriptions/${item.id}`}>
-                  
                   <span>
                     <span>{!checkDateExpired(item.expireDate) 
                       ? <div className="flex items-center justify-center gap-2 text-green-600">
@@ -96,7 +94,7 @@ export default function TableSubscriptions({ subscriptions, page }: PaginationPr
           </TableBody>
         </Table>)}
       </CardContent>
-      <PaginationTableSubscription page={page} />
+      <PaginationTable route="/app/subscriptions" page={page} />
     </Card>
   )
 }

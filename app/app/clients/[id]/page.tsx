@@ -14,13 +14,15 @@ import {
 } from "@/components/ui/accordion";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
-import InfoCardClient from "../components/info-card-client";
+
 import PasswordText from "../components/password-text";
 import InfoCard from "@/components/info-card";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import BadgeTable from "@/components/badge-table";
 import { Button } from "@/components/ui/button";
 import getClientById from "@/app/actions/clients/client-id";
+import InfoCardClient from "../components/info-card-client";
+
 
 const URL_API = process.env.NEXT_PUBLIC_API_URL;
 

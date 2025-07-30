@@ -5,7 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import CardsClientMobile from "./cards-client-mobile";
 import FilterTable from "./filter-table";
-import { PaginationTableClient } from "./pagination-client";
+import { PaginationTable } from "@/components/pagination";
+
 
 interface PaginationProps {
   clients: IClient[];
@@ -43,7 +44,7 @@ export default function TableClientsMobile({ clients, page }: PaginationProps) {
       </div>
 
       <div className="mt-6">
-        <PaginationTableClient page={page} />
+        <PaginationTable route="/app/clients" page={page} />
       </div>
     </div>
   );
