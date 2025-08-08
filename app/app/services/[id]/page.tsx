@@ -45,12 +45,12 @@ export default async function Service({ params }: ClientProps) {
         <Separator className="my-4" />
 
         <div className="flex flex-col gap-4">
-          <InfoRow icon={<BriefcaseBusiness />} label="Serviço" value={service.name} />
-          <InfoRow icon={<CircleDollarSignIcon />} label="Valor" value={formatterPrice(service.price)} />
+          <InfoRow icon={<BriefcaseBusiness />} label="Serviço" value={service?.name ?? ""} />
+          <InfoRow icon={<CircleDollarSignIcon />} label="Valor" value={formatterPrice(service?.price ?? 0)} />
         </div>
         </CardContent>
         <CardFooter className="flex ">
-          <Link href={`/app/services/update/${service.id}`} className="w-full rounded-lg bg-indigo-500 hover:bg-indigo-600 text-white">
+          <Link href={`/app/services/update/${service?.id}`} className="w-full rounded-lg bg-indigo-500 hover:bg-indigo-600 text-white">
             <Button variant="outline" className="w-full cursor-pointer ">
               Atualizar Serviço
             </Button>

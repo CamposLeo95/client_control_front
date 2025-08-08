@@ -36,15 +36,15 @@ export default async function Payment({ params }: PaymentProps) {
     },
   });
 
-  const { data: sign } = await axios.get<ISign>(`${URL_API}/sign/${payment.sign.id}`, {
+  const { data: sign } = await axios.get<ISign>(`${URL_API}/sign/${payment?.sign.id}`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
   });
 
-  const [year, month, day] = payment.createdAt!;
-  const monthsPaid = payment.value / sign.serviceOffering.price || 0;
+  const [year, month, day] = payment?.createdAt!;
+  const monthsPaid = payment?.value / sign.serviceOffering.price || 0;
   const date = new Date(year, month - 1, day);
   const renewDate = new Date(date.setMonth(date.getMonth() + monthsPaid)).toLocaleDateString('pt-BR');
 
@@ -79,13 +79,13 @@ export default async function Payment({ params }: PaymentProps) {
             <AccordionContent className="flex flex-col gap-3 mt-2">
               <InfoRow icon={<BriefcaseBusiness />} label="Serviço" value={sign.serviceOffering.name} />
               <InfoRow icon={<HandCoins />} label="Meses pagos" value={monthsPaid.toString()} />
-              <InfoRow icon={<BanknoteArrowDown />} label="Total pago" value={formatterPrice(payment.value)} />
-              <InfoRow icon={<Calendar />} label="Data do pagamento" value={formatterDateAPI(payment.createdAt!)} />
+              <InfoRow icon={<BanknoteArrowDown />} label="Total pago" value={formatterPrice(payment?.value)} />
+              <InfoRow icon={<Calendar />} label="Data do pagamento" value={formatterDateAPI(payment?.createdAt!)} />
               <InfoRow icon={<CalendarClock />} label="Renovado até" value={renewDate} />
               <Separator className="my-2" />
               <textarea
                 className="w-full h-24 p-2 border border-zinc-300 rounded-md text-zinc-500 font-semibold italic resize-none"
-                value={payment.description}
+                value={payment?.description}
                 disabled
               />
             </AccordionContent>
@@ -99,10 +99,10 @@ export default async function Payment({ params }: PaymentProps) {
               </div>
             </AccordionTrigger>
             <AccordionContent className="flex flex-col gap-3 mt-2">
-              <InfoCard icon={<User className="text-indigo-600" width={20} />} data={payment.client.name} />
-              <InfoCard icon={<Mail className="text-indigo-600" width={20} />} data={payment.client.email} />
-              <InfoCard icon={<Lock className="text-indigo-600" width={20} />} data={payment.client.login} />
-              <InfoCard icon={<Phone className="text-indigo-600" width={20} />} data={formatPhoneNumber(payment.client.phone)} />
+              <InfoCard icon={<User className="text-indigo-600" width={20} />} data={payment?.client?.name} />
+              <InfoCard icon={<Mail className="text-indigo-600" width={20} />} data={payment?.client?.email} />
+              <InfoCard icon={<Lock className="text-indigo-600" width={20} />} data={payment?.client?.login} />
+              <InfoCard icon={<Phone className="text-indigo-600" width={20} />} data={formatPhoneNumber(payment?.client?.phone)} />
             </AccordionContent>
           </AccordionItem>
         </Accordion>

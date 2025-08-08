@@ -38,16 +38,19 @@ export default async function EditDescription({ params }: SubscriptionProps) {
           </Link>
         </CardHeader>
         <CardContent className="space-y-4">
-                    <InfoToggleRow
-                      icon={<BriefcaseBusiness />} label="Status da assinatura"
-                      content={<ToggleForm id={sign.id} checked={sign.activeSign} />}
-                    />
-          
-                    <InfoToggleRow
-                      icon={<TriangleAlert />} label="Data de expiração"
-                      content={formatterDateAPI(sign.expireDate)}
-                    />
-                       <FormDescription id={id} description={sign.description}  />
+            { sign?.id && sign?.activeSign &&(
+                <InfoToggleRow
+                    icon={<BriefcaseBusiness />} label="Status da assinatura"
+                    content={<ToggleForm id={sign?.id} checked={sign?.activeSign} />}
+                />
+            )}
+           { sign?.expireDate &&(
+              <InfoToggleRow
+                icon={<TriangleAlert />} label="Data de expiração"
+                content={formatterDateAPI(sign?.expireDate)}
+              />
+           )}
+                  <FormDescription id={id} description={sign?.description ?? ""}  />
                   <Separator className="my-4" />
                     {/* Accordions */}
                     <Accordion type="single" collapsible>
@@ -59,10 +62,12 @@ export default async function EditDescription({ params }: SubscriptionProps) {
                           </div>
                         </AccordionTrigger>
                         <AccordionContent className="flex flex-col gap-3 mt-2">
-                          <InfoCard icon={<User className="text-indigo-600" width={20} />} data={sign.client.name} />
-                          <InfoCard icon={<Mail className="text-indigo-600" width={20} />} data={sign.client.email} />
-                          <InfoCard icon={<Lock className="text-indigo-600" width={20} />} data={sign.client.login} />
-                          <InfoCard icon={<Phone className="text-indigo-600" width={20} />} data={formatPhoneNumber(sign.client.phone)} />
+                          <InfoCard icon={<User className="text-indigo-600" width={20} />} data={sign?.client.name} />
+                          <InfoCard icon={<Mail className="text-indigo-600" width={20} />} data={sign?.client.email} />
+                          <InfoCard icon={<Lock className="text-indigo-600" width={20} />} data={sign?.client.login} />
+                          { sign?.client.phone &&(
+                          <InfoCard icon={<Phone className="text-indigo-600" width={20} />} data={formatPhoneNumber(sign?.client.phone)} />
+                          )}
                         </AccordionContent>
                       </AccordionItem>
           
@@ -74,8 +79,12 @@ export default async function EditDescription({ params }: SubscriptionProps) {
                           </div>
                         </AccordionTrigger>
                         <AccordionContent className="flex flex-col gap-5 mt-2">
-                          <InfoRow icon={<BriefcaseBusiness />} label="Serviço" value={sign.serviceOffering.name} />
-                          <InfoRow icon={<CircleDollarSignIcon />} label="Valor" value={formatterPrice(sign.serviceOffering.price)} />
+                          { sign?.serviceOffering.name &&(
+                          <InfoRow icon={<BriefcaseBusiness />} label="Serviço" value={sign?.serviceOffering.name} />
+                          )}
+                          { sign?.serviceOffering.price &&(                    
+                          <InfoRow icon={<CircleDollarSignIcon />} label="Valor" value={formatterPrice(sign?.serviceOffering.price)} />
+                          )}
                         </AccordionContent>
                       </AccordionItem>
                     </Accordion>

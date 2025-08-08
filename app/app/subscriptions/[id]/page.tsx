@@ -59,37 +59,42 @@ export default async function Subscription({ params }: SubscriptionProps) {
         <Separator className="my-4" />
 
         <CardContent className="space-y-4">
-          <InfoToggleRow
+          { sign?.id && sign?.activeSign && (<InfoToggleRow
             icon={<BriefcaseBusiness />} label="Status da assinatura"
-            content={<ToggleForm id={sign.id} checked={sign.activeSign} />}
-          />
-
-          <InfoToggleRow
+            content={<ToggleForm id={sign?.id} checked={sign?.activeSign} />}
+          />)}
+          
+  {
+    sign?.expireDate && (
+       <InfoToggleRow
             icon={<TriangleAlert />} label="Data de expiração"
             content={
               <span>
-                <span>{!checkDateExpired(sign.expireDate) 
+                <span>{!checkDateExpired(sign?.expireDate) 
                   ? <div className="flex items-center justify-center gap-2 text-green-600">
                       <CheckCircle width={14}  /> 
                       <span>
-                        {formatterDateAPI(sign.expireDate)}
+                        {formatterDateAPI(sign?.expireDate)}
                       </span>
                     </div>
                   : <div className="flex items-center justify-center gap-2 text-red-500">
                       <AlertOctagon width={14}  />
                       <span>
-                        {formatterDateAPI(sign.expireDate)}
+                        {formatterDateAPI(sign?.expireDate)}
                       </span>
                     </div>
                 }</span>
               </span>
             }
           />
+    )
+  }
+         
           <InfoToggleRow
             icon={<Info />} label="Descrição"
             content={
-            <Link href={`/app/subscriptions/${sign.id}/edit-description`}>
-              {sign.description 
+            <Link href={`/app/subscriptions/${sign?.id}/edit-description`}>
+              {sign?.description 
               ? (
                 <div className="flex text-md text-indigo-400 mr-2 font-medium items-center gap-2">
                   <Edit width={23} />
@@ -106,7 +111,7 @@ export default async function Subscription({ params }: SubscriptionProps) {
             }
           />
           {sign?.description &&(
-             <Link href={`/app/subscriptions/${sign.id}/edit-description`}>
+             <Link href={`/app/subscriptions/${sign?.id}/edit-description`}>
               <div
                 className="flex items-center gap-2 border rounded-md px-3 py-2 bg-secondary text-indigo-400 font-semibold"
               >
@@ -125,10 +130,10 @@ export default async function Subscription({ params }: SubscriptionProps) {
                 </div>
               </AccordionTrigger>
               <AccordionContent className="flex flex-col gap-3 mt-2">
-                <InfoCard icon={<User className="text-indigo-600" width={20} />} data={sign.client.name} />
-                <InfoCard icon={<Mail className="text-indigo-600" width={20} />} data={sign.client.email} />
-                <InfoCard icon={<Lock className="text-indigo-600" width={20} />} data={sign.client.login} />
-                <InfoCard icon={<Phone className="text-indigo-600" width={20} />} data={formatPhoneNumber(sign.client.phone)} />
+                <InfoCard icon={<User className="text-indigo-600" width={20} />} data={sign?.client.name} />
+                <InfoCard icon={<Mail className="text-indigo-600" width={20} />} data={sign?.client.email} />
+                <InfoCard icon={<Lock className="text-indigo-600" width={20} />} data={sign?.client.login} />
+                <InfoCard icon={<Phone className="text-indigo-600" width={20} />} data={sign?.client?.phone && formatPhoneNumber(sign.client.phone)} />
               </AccordionContent>
             </AccordionItem>
 
@@ -140,8 +145,9 @@ export default async function Subscription({ params }: SubscriptionProps) {
                 </div>
               </AccordionTrigger>
               <AccordionContent className="flex flex-col gap-5 mt-2">
-                <InfoRow icon={<BriefcaseBusiness />} label="Serviço" value={sign.serviceOffering.name} />
-                <InfoRow icon={<CircleDollarSignIcon />} label="Valor" value={formatterPrice(sign.serviceOffering.price)} />
+
+                <InfoRow icon={<BriefcaseBusiness />} label="Serviço" value={sign?.serviceOffering.name ?? ""} />
+                <InfoRow icon={<CircleDollarSignIcon />} label="Valor" value={ formatterPrice(sign?.serviceOffering.price ?? 0)} />
               </AccordionContent>
             </AccordionItem>
           </Accordion>
@@ -149,7 +155,7 @@ export default async function Subscription({ params }: SubscriptionProps) {
           <Separator className="my-4" />
 
           <Link
-            href={`/app/payments/renew/${sign.id}`}
+            href={`/app/payments/renew/${sign?.id}`}
             className="w-full inline-flex justify-center items-center p-3 text-white bg-indigo-500 hover:bg-indigo-600 rounded-md text-sm font-medium"
           >
             Renovar Assinatura

@@ -36,11 +36,14 @@ export default async function Client({ params }: ClientProps) {
 
   const client = await getClientById(id);
 
-  const { data: signs } = await axios.get<ISign[]>(`${URL_API}/sign?client=${client.name}`, {
+  const { data: signs } = await axios.get<ISign[]>(`${URL_API}/sign`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
+    params: {
+      all: client?.name
+    }
   });
 
   return (
@@ -69,17 +72,17 @@ export default async function Client({ params }: ClientProps) {
               </div>
             </AccordionTrigger>
             <AccordionContent className="flex flex-col gap-3 mt-2">
-              {client.name && <InfoCard icon={<User />} data={client.name} />}
+              {client?.name && <InfoCard icon={<User />} data={client?.name} />}
 	
-              {client.email && <InfoCard icon={<Mail />} data={client.email} />}
+              {client?.email && <InfoCard icon={<Mail />} data={client?.email} />}
 
-              {client.login && <InfoCard icon={<Lock />} data={client.login} />}
+              {client?.login && <InfoCard icon={<Lock />} data={client?.login} />}
 
-              {client.phone && <InfoCard icon={<Phone />} data={formatPhoneNumber(client.phone)} />}
+              {client?.phone && <InfoCard icon={<Phone />} data={formatPhoneNumber(client?.phone)} />}
 
-              {client.password && <InfoCard icon={<Lock />} data={<PasswordText value={client.password} />} />}
+              {client?.password && <InfoCard icon={<Lock />} data={<PasswordText value={client?.password} />} />}
 
-              {client.createdAt && <InfoCard icon={<Calendar />} data={formatterDateAPI(client.createdAt)} />}
+              {client?.createdAt && <InfoCard icon={<Calendar />} data={formatterDateAPI(client?.createdAt)} />}
             </AccordionContent>
           </AccordionItem>
 
@@ -139,7 +142,7 @@ export default async function Client({ params }: ClientProps) {
         </Accordion>
         </CardContent>
         <CardFooter className="flex ">
-          <Link href={`/app/clients/update/${client.id}`} className="w-full rounded-lg bg-indigo-500 hover:bg-indigo-600 text-white">
+          <Link href={`/app/clients/update/${client?.id}`} className="w-full rounded-lg bg-indigo-500 hover:bg-indigo-600 text-white">
             <Button variant="outline" className="w-full cursor-pointer ">
               Atualizar Cliente
             </Button>
