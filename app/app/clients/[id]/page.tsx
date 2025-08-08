@@ -36,16 +36,15 @@ export default async function Client({ params }: ClientProps) {
 
   const client = await getClientById(id);
 
-  const { data: signs } = await axios.get<ISign[]>(`${URL_API}/sign`, {
+  const { data: signs  } = await axios.get<ISign[]>(`${URL_API}/sign`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
     params: {
-      all: client?.name
+      all: client?.login
     }
   });
-
   return (
     <div className="flex flex-col items-center gap-8">
     <Card className="w-full md:max-w-3xl rounded-xl md:shadow-sm md:border-2 md:bg-primary-foreground bg-transparent border-none shadow-none">
