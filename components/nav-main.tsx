@@ -31,10 +31,6 @@ export function NavMain({ items }: NavMainProps) {
     return false
   }
 
-  items.forEach((item) => 
-    console.log(`Item: ${item.title}, URL: ${item.url}, Active: ${isActivePathName(item.url)}`)
-)
-
   return (
     <SidebarGroup>
       <SidebarGroupContent className="flex flex-col gap-2">

@@ -58,13 +58,19 @@ export default async function createPayment(_prevState: any, body: BodyProps) {
       isSuccess: true
     };
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      return {
-        verifyReq: false,
-        message: error.response?.data?.message || "Erro ao realizar pagamento",
-        isSuccess: false,
-      };
-    }
+       if (axios.isAxiosError(error)) {
+        const data = error.response?.data;
+        const msg =
+          typeof data === "string"
+            ? data
+            : (data && (data.message || data.error)) || error.message;
+
+        return {
+          verifyReq: false,
+          message: msg,
+          isSuccess: false
+        };
+      }
     return {
       verifyReq: false,
       message: "Erro ao realizar pagamento",

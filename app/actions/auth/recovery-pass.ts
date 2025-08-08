@@ -17,7 +17,6 @@ export async function recoveryPassAction(_prevState: any, formData: FormData) {
       }
     );
 
-    console.log("Response:", res.status, res.data);
     if (res.status !== 200) {
       throw new Error(`Erro ao enviar o link de recuperação!`);
     }
@@ -28,13 +27,18 @@ export async function recoveryPassAction(_prevState: any, formData: FormData) {
       isSuccess: true,
     }
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        console.log("Axios Error:", error.response?.status, error.response?.data);
-         return {
-            verifyReq: false,
-            message: error.response?.data || error.message,
-            isSuccess: false,
-          }
+        if (axios.isAxiosError(error)) {
+        const data = error.response?.data;
+        const msg =
+          typeof data === "string"
+            ? data
+            : (data && (data.message || data.error)) || error.message;
+
+        return {
+          verifyReq: false,
+          message: msg,
+          isSuccess: false
+        };
       }
       return {
         verifyReq: false,

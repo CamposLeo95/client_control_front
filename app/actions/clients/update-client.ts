@@ -9,7 +9,6 @@ export async function updateClient(_prevState: any, formData: FormData) {
     const token = (await cookies()).get("api-token")?.value;
     const {name, login, phone, email, password, id} = Object.fromEntries(formData.entries());
 
-    console.log("Updating client with ID:", id);
     try {
     const res = await axios.put(`${URL_API}/client/${id}`,
       { name, phone, email, login, password }, 
@@ -31,12 +30,18 @@ export async function updateClient(_prevState: any, formData: FormData) {
       isSuccess: true,
     }
   } catch (error) {
-      if (axios.isAxiosError(error)) {
-         return {
-            verifyReq: false,
-            message: error.response?.data || error.message,
-            isSuccess: false,
-          }
+    if (axios.isAxiosError(error)) {
+        const data = error.response?.data;
+        const msg =
+          typeof data === "string"
+            ? data
+            : (data && (data.message || data.error)) || error.message;
+
+        return {
+          verifyReq: false,
+          message: msg,
+          isSuccess: false
+        };
       }
       return {
         verifyReq: false,

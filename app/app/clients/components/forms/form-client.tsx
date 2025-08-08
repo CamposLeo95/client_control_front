@@ -35,14 +35,10 @@ export default function FormClient({ id, client }: IClientProps) {
   })
 
   useEffect(() => {
-    if (updateState?.isSuccess) {
-      push("/app/clients");
-    }
-
-    if (createState?.isSuccess) {
-      push("/app/clients");
-    }
-  }, [updateState, createState]);
+  if (updateState?.isSuccess || createState?.isSuccess) {
+    push("/app/clients");
+  }
+}, [updateState?.isSuccess, createState?.isSuccess, push]);
 
  
   return (
@@ -75,7 +71,7 @@ export default function FormClient({ id, client }: IClientProps) {
         <FormField id="password" name="password" placeholder="Senha" Icon={Lock} initialValue={client?.password} label="Senha" />
         <FormField id="email" name="email" placeholder="Email" type="email" Icon={Mail} initialValue={client?.email} label="Email" />
         <FormField id="phone" name="phone" placeholder="Telefone" Icon={Phone} initialValue={client?.phone} label="Telefone" />
-        <input type="text" name="id" value={id} className="hidden" />
+        <input type="text" name="id" defaultValue={id ?? ""} className="hidden" />
 
         <Separator className="my-4" />
 
