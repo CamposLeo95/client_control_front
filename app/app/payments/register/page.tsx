@@ -11,6 +11,9 @@ export default async function Register(){
         "Content-Type": "application/json",
         authorization: `Bearer ${token}`,
       },
+      params: {
+        size: 100000
+      }
     });
 
     const {data: services} =  await axios.get(`${URL_API}/service-offerring`, {
@@ -18,6 +21,9 @@ export default async function Register(){
         "Content-Type": "application/json",
         authorization: `Bearer ${token}`,
       },
+       params: {
+        size: 100000
+      }
     });
 
   return(

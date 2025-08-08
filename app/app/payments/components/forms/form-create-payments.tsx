@@ -65,7 +65,7 @@ export default function FormCreatePayment({ clients, services }: FormCreatePayme
 
   const clientsDropdown = clients.map((client) => ({
     value: client.id,
-    label: client.name,
+    label: `${client.name} - ${client.login}`,
   }));
 
   const servicesDropdown = services.map((service) => ({
@@ -121,7 +121,9 @@ export default function FormCreatePayment({ clients, services }: FormCreatePayme
       >
         <div className="grid grid-cols-8 gap-2 mt-4">
           <div className="col-span-8">
-            <Combobox title="Cliente" itemId={clientId} setValue={setClientId} list={clientsDropdown} icon={<User />} />
+            <Combobox 
+              title="Cliente" 
+              itemId={clientId} setValue={setClientId} list={clientsDropdown} icon={<User />} />
           </div>
 
           <div className="col-span-8 md:col-span-4">

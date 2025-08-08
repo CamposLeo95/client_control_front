@@ -4,17 +4,18 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import axios from "axios";
 import { cookies } from "next/headers";
 import { MySelf } from "../types/user.type";
-import { Suspense } from "react";
 const URL_API = process.env.NEXT_PUBLIC_API_URL;
 export default async function LayoutApp({ children }: { children: React.ReactNode }) {
   const token = (await cookies()).get("api-token")?.value;
-
   const { data: user } = await axios.get<MySelf>(`${URL_API}/user/me`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
   });
+
+
+
 return (
     <div className="flex min-h-screen">
       <SidebarProvider
