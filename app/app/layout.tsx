@@ -3,24 +3,34 @@ import { AppSidebar } from "@/components/ui/app-sidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import axios from "axios";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import { MySelf } from "../types/user.type";
 const URL_API = process.env.NEXT_PUBLIC_API_URL;
 export default async function LayoutApp({ children }: { children: React.ReactNode }) {
   const token = (await cookies()).get("api-token")?.value;
-  const { data: user } = await axios.get<MySelf>(`${URL_API}/user/me`, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  if (!token || !URL_API) {
+    redirect("/auth/login");
+  }
 
+  let user: MySelf | null = null;
+  try {
+    const { data } = await axios.get<MySelf>(`${URL_API}/user/me`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    user = data;
+  } catch (error) {
+    console.error("Failed to fetch user data:", error);
+    redirect("/auth/login");
+  }
 
-
-return (
+  return (
     <div className="flex min-h-screen">
       <SidebarProvider
       >
-        <AppSidebar user={user} />
+        <AppSidebar user={user!} />
         <main className="flex-1 px-4  w-full ">
           <div className="w-full flex items-center justify-between ">
             <div className="flex items-center gap-2 p-2">
