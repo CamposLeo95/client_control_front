@@ -11,6 +11,7 @@ type IParams = {
   all?: string;
   startDate?: string;
   endDate?: string;
+  expiredFirst?:string
 }
 
 interface Props {
@@ -33,6 +34,7 @@ export default async function SubscriptionPage({ searchParams }: Props) {
       all: searchParamsRes.all || "",
       startDate: searchParamsRes.startDate || "2000-01-01",
       endDate: searchParamsRes.endDate || "3000-01-01",
+      expiredFirst: searchParamsRes.expiredFirst || false
     }
   });
 

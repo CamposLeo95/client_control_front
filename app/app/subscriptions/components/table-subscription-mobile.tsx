@@ -5,6 +5,7 @@ import FilterTable from "./filter-table";
 
 import { PaginationTable } from "@/components/pagination";
 import CardsSubscriptionMobile from "./card-subscription-mobile";
+import { checkDateExpired } from "@/app/utils/formatter-date";
 
 
 interface PaginationProps {
@@ -13,16 +14,13 @@ interface PaginationProps {
 }
 
 export default function TableSubscriptionMobile({ subscriptions, page }: PaginationProps) {
+
   return (
     <div className="w-full px-4 block md:hidden">
       <div className="flex items-center justify-end w-full mt-4">
-        
-
         <FilterTable />
       </div>
-
       <Separator className="my-4" />
-
       <div className="min-h-[400px] space-y-3">
         {subscriptions.length === 0 ? (
           <div className="flex items-center justify-center h-96 flex-col gap-4">
